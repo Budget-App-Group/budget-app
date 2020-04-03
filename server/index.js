@@ -30,6 +30,16 @@ app.get('/api/kid/budget:user_id', kidCtrl.getBudget)
 app.post('/api/kid/purchased/:user_id', kidCtrl.postBudget)
 app.put('/api/kid/pruchased/:user_id', kidCtrl.updateBudget)
 
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    rejectUnauthorized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+    secret: SESSION_SECRET,
+  })
+);
+
 massive({
     connectionString: CONNECTION_STRING,
     ssl: {
