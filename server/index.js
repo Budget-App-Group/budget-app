@@ -1,7 +1,22 @@
 require("dotenv").config();
 
-// const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
+const express = require('express'),
+    massive = require("massive"),
+    session = require('express-session'),
+    { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env,
+    app = express()
 
-// app.listen(SERVER_PORT, () =>
-//   console.log(`<--- SERVER RUNNING ON PORT ${SERVER_PORT} --->`)
-// );
+app.use(express.json())
+
+massive({
+    connectionString: CONNECTION_STRING,
+    ssl: {
+        rejectUnauthorized: false
+    }
+}).then(dbObj => {
+    app.set('db', dbObj)
+    console.log('<---------- Database connected ---------->')
+    app.listen(SERVER_PORT, () => `<---- Server running on port => ${SERVER_PORT} ---->`)
+})
+
+
