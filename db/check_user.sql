@@ -1,1 +1,0 @@
-SELECT u.email, c.isAdmin, c.isKid FROM users u JOIN control c on u.user_id = c.user_id WHERE u.user_email = $1;
