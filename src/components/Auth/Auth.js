@@ -18,10 +18,24 @@ class Auth extends Component {
   handleInput = event => {
     this.setState({
       [event.target.name]: event.target.value
+
     });
   };
 
   Login = () => {
+    axios
+      .post("/auth/login", {
+        email: this.state.email,
+        password: this.state.password,
+      })
+      .then((res) => {
+        this.props.getUser(res.data);
+        this.props.history.push("/dash");
+      });
+  };
+
+  render() {
+    return <div></div>;
 
     axios.post('/api/login', {
       email: this.state.email,

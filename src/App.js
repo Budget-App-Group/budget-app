@@ -16,9 +16,9 @@ function App(props) {
         <>
           <Header />
           {routes}
+          <Footer />
         </>
       )}
-      <Footer />
     </div>
   );
 }

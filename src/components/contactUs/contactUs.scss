@@ -1,0 +1,27 @@
+.contact-main {
+  height: 82%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-form {
+  height: 70%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.message-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.message-input {
+  height: 100px;
+  width: 200px;
+}
