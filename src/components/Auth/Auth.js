@@ -13,7 +13,6 @@ class Auth extends Component {
             // user_id: "" don't need user_id this component
         };
     }
-
     componentDidUpdate(prevProp){
         if(this.props.user.user_id !== prevProp.user.user_id) {
             this.props.history.push('/')
@@ -32,11 +31,7 @@ class Auth extends Component {
         //     email: this.state.email,
         //     password: this.state.password
         // }).then(res => {
-
-        //     this.props.getUser(res.data);
-        //     this.props.history.push('/dash')
-        // })
-    }
+  };
 
 
     render() {
