@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { login } from '../../redux/userReducer'
-import './Auth.css'
-import { Link } from 'react-router-dom'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { login } from "../../redux/userReducer";
+import "./Auth.scss";
+import { Link } from "react-router-dom";
 
 class Auth extends Component {
   constructor(props) {
@@ -13,7 +13,6 @@ class Auth extends Component {
       // user_id: "" don't need user_id this component
     };
   }
-
   componentDidUpdate(prevProp) {
     if (this.props.user.user_id !== prevProp.user.user_id) {
       this.props.history.push('/')
@@ -35,6 +34,14 @@ class Auth extends Component {
     // }).then(res => {
   };
 
+  Login = (event) => {
+    event.preventDefault();
+    this.props.login(this.state.email, this.state.password);
+    // axios.post('/auth/login', {
+    //     email: this.state.email,
+    //     password: this.state.password
+    // }).then(res => {
+  };
 
   render() {
     return ( 
