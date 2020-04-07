@@ -1,38 +1,37 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { connect } from "react-redux";
-import { checkUser } from "../../redux/userReducer";
-import { Link } from "react-router-dom";
+
+import React, {Component} from 'react'
+import axios from 'axios'
+import {connect} from 'react-redux'
+import { register } from '../../redux/userReducer'
+import {Link} from 'react-router-dom'
+
 
 class Register extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
+    constructor() {
+      super();
+      this.state = {
+        email: "",
+        password: ""
+      };
+    }
+  
+    handleInput = event => {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
     };
-  }
-
-  handleInput = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  handleRegister = () => {
-    console.log(this.state);
-    const { email, password } = this.state;
-    axios
-      .post("/api/register", {
-        email,
-        password,
-      })
-      .then((res) => {
-        this.props.checkUser(res.data);
-        this.props.history.push("/");
-      })
-      .catch((err) => console.log(err));
-  };
+    
+    handleRegister = () => {
+      console.log(this.state)
+      const { email, password } = this.state;
+      axios.post('/api/register', {
+          email,
+          password
+        }).then(res => {
+          this.props.getUser(res.data);
+          this.props.history.push('/');
+        }).catch(err => console.log(err));
+    };
 
   render() {
     return (
@@ -70,4 +69,4 @@ class Register extends Component {
   }
 }
 
-export default connect(null, { checkUser })(Register);
+export default connect(null, { register })(Register);
