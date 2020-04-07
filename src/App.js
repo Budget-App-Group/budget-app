@@ -13,7 +13,7 @@ function App(props) {
       {/* props.user.isAdmin */}
 
       {
-        console.log(`Is this admin: ${props.user.isAdmin ? "yes" : "no"}`)
+        console.log(`Is this Admin: ${props.user.isAdmin ? "yes" : "no"}`)
       }
       app.js component --remove me!
       {props.location.pathname === "/" ? (
