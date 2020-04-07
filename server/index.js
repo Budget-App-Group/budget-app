@@ -7,10 +7,26 @@ const express = require("express"),
   authCtrl = require("./controllers/authController"),
   middleCtrl = require('./middlewareControllers/middleControllers'),
   mailCtrl = require("./controllers/nodeMailerController"), // added for nodemailer contact form
-  { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env,
+const socketio = require("socket.io")
+const http = require("http")
+const router = require("./router")
+const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env,
   app = express();
 
 app.use(express.json());
+app.use(router)
+
+const server = http.createServer(app)
+const io = socketio(server)
+
+io.on("connection", (socket) => {
+  console.log("User connected")
+
+  socket.on("disconnect", () => {
+    console.log("user has left")
+  })
+})
+
 
 /* ------- Auth -------- */
 app.post('/auth/login', authCtrl.login)
@@ -53,7 +69,7 @@ massive({
 }).then((dbObj) => {
   app.set("db", dbObj);
   console.log("<---------- Database connected ---------->");
-  app.listen(SERVER_PORT, () =>
-    console.log(`<---- Server running on port => ${SERVER_PORT} ---->`)
+  io = socket(app.listen(SERVER_PORT, () =>
+    console.log(`<---- Server running on port => ${SERVER_PORT} ---->`))
   );
 });

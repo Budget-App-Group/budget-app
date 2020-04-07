@@ -23,6 +23,7 @@ class Auth extends Component {
         this.setState({
             [event.target.name]: event.target.value
         });
+    }
         
     Login = event => {
         event.preventDefault();
@@ -34,7 +35,7 @@ class Auth extends Component {
   };
 
 
-    render() ;{
+    render() {
         return (
           <div className="app-body">
             <input
@@ -69,7 +70,7 @@ class Auth extends Component {
         );
       }
     }
-}
+
 const mapStateToProps = reduxState => {
     const { user } = reduxState.user
     return {
