@@ -19,10 +19,12 @@ class Auth extends Component {
     }
   }
 
+
   handleInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
+ 
   };
 
   Login = (event) => {
