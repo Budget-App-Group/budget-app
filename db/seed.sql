@@ -25,5 +25,18 @@ CREATE TABLE control (
 user_id INT,
 FOREIGN KEY (user_id) REFERENCES users(user_id),
 is_admin BOOLEAN,
-is_kid BOOLEANx
+is_kid BOOLEAN
+);
+
+
+CREATE TABLE roles (
+    parent_id INT,
+    kid_id INT
+);
+
+CREATE TABLE family (
+    parent_id INT,
+    FOREIGN KEY(parent_id) REFERENCES roles(parent_id),
+    child_id INT,
+    FOREIGN KEY(child_id) REFERENCES roles(kid_id)
 );

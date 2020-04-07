@@ -1,0 +1,1 @@
+SELECT * FROM budget where user_id = $1;

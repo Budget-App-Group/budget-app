@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {getUser} from '../../redux/userReducer'
+import { register } from '../../redux/userReducer'
 import {Link} from 'react-router-dom'
 
 
@@ -19,7 +19,7 @@ class Register extends Component {
         [event.target.name]: event.target.value
       });
     };
-  
+    
     handleRegister = () => {
       console.log(this.state)
       const { email, password } = this.state;
@@ -72,5 +72,5 @@ class Register extends Component {
   }
   
  
-  export default connect(null, { getUser })(Register);
+  export default connect(null, { register })(Register);
   
