@@ -34,7 +34,7 @@ class Auth extends Component {
   };
 
 
-    render() {
+    render() ;{
         return (
           <div className="app-body">
             <input
