@@ -16,12 +16,12 @@ function App(props) {
       {props.location.pathname === "/" ? (
         <>{routes}</>
       ) : (
-        <>
-          <Header />
-          {routes}
-          <Footer />
-        </>
-      )}
+          <>
+            <Header />
+            {routes}
+            <Footer />
+          </>
+        )}
     </div>
   );
 }

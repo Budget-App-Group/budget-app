@@ -42,7 +42,7 @@ export function register(email, password) {
 export default function userReducer(state = initialState, action) {
     const { type, payload } = action
 
-    switch(type) {
+    switch (type) {
         case CHECK_USER + "_PENDING": return { ...state, isLoading: true, isError: false }
         case CHECK_USER + "_FULFILLED": return { ...state, user: payload.data, isLoading: false }
         case CHECK_USER + "_REJECTED": return { ...state, user: {}, isLoading: false, isError: true, errorMessage: payload.response.data }
