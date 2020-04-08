@@ -7,15 +7,13 @@ const express = require("express"),
   authCtrl = require("./controllers/authController"),
   middleCtrl = require('./middlewareControllers/middleControllers'),
   mailCtrl = require("./controllers/nodeMailerController"), // added for nodemailer contact form
-//socket imports
-const socketio = require("socket.io")
-const http = require("http")
-const router = require("./router")
-const cors = require('cors')
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./users.js')
-
-const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env,
-  app = express();
+  socketio = require("socket.io"),
+  http = require("http"),
+  router = require("./router"),
+  cors = require("cors"),
+  app = express(),
+  { addUser, removeUser, getUser, getUsersInRoom } = require('./users.js'),
+  { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
 app.use(express.json());
 
@@ -70,7 +68,7 @@ app.get('/auth/check', authCtrl.getUser)
 
 /* -------- Parents -------- */
 
-app.get('/api/budget/:user_id', middleCtrl.isAdmin, parentCtrl.getBudget)
+app.get('/api/budget/:user_id', middleCtrl.isAdmin, parentCtrl.getAllKidBudget)
 app.post('/api/admin/budget', middleCtrl.isAdmin, parentCtrl.postBudget)
 app.put('/api/admin/budget/:budget_id', middleCtrl.isAdmin, parentCtrl.updateBudget)
 app.delete('/api/admin/budget/:budget_id', middleCtrl.isAdmin, parentCtrl.deleteBudget)
@@ -78,7 +76,7 @@ app.delete('/api/admin/budget/:budget_id', middleCtrl.isAdmin, parentCtrl.delete
 /* -------- Kids --------- */
 
 app.get('/api/kid/budget:user_id', middleCtrl.isUser, kidCtrl.getBudget)
-app.post('/api/kid/purchased/:user_id', middleCtrl.isUser, kidCtrl.postBudget)
+app.post('/api/kid/purchased/:user_id', middleCtrl.isUser, kidCtrl.postPurchase)
 app.put('/api/kid/pruchased/:user_id', middleCtrl.isUser, kidCtrl.updateBudget)
 
 // Nodemailer for contact form
@@ -103,7 +101,7 @@ massive({
 }).then((dbObj) => {
   app.set("db", dbObj);
   console.log("<---------- Database connected ---------->");
-  io = socket(app.listen(SERVER_PORT, () =>
+  io.listen(SERVER_PORT, () =>
     console.log(`<---- Server running on port => ${SERVER_PORT} ---->`))
-  );
+  // );
 });

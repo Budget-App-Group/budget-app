@@ -1,4 +1,5 @@
-import { get, post } from 'axios'
+import axios from 'axios'
+const { get, post } = axios
 const initialState = {
     budget: {},
     isLoading: false,
@@ -7,10 +8,18 @@ const initialState = {
 }
 
 const GET_BUDGET = "GET_BUDGET",
+    GET_ALL_BUDGET = "GET_ALL_BUDGET",
     POST_BUDGET = "POST_BUDGET",
+    UPDATE_BUDGET = "UPDATE_BUDGET",
+    DELETE_BUDGET = "DELETE_BUDGET",
     GET_KID_BUDGET = "GET_KID_BUDGET",
-    POST_KID_BUDGET = "POST_KID_BUDGET"
+    POST_KID_BUDGET = "POST_KID_BUDGET",
+    UPDATE_KID_BUDGET = "UPDATE_KID_BUDGET"
 
+
+/* ------------------------------------------- */
+/* ----------------- Parents ----------------- */
+/* ------------------------------------------- */
 
 export function getBudget() {
     return {
@@ -19,12 +28,37 @@ export function getBudget() {
     }
 }
 
-export function postBudget(budget) {
+export function getAllBudget() {
     return {
-        type: POST_BUDGET,
-        payload: post('/api/budget')
+        type: GET_ALL_BUDGET,
+        payload: get('/api/budgets')
     }
 }
+
+export function postBudget(budget, kid_id) {
+    return {
+        type: POST_BUDGET,
+        payload: post('/api/budget', { kid_id, budget })
+    }
+}
+
+export function updateBudget(budget_id, kid_id, price) {
+    return {
+        type: UPDATE_BUDGET,
+        payload: post(`/api/budget${budget_id}`, { kid_id, price })
+    }
+}
+
+export function deleteBudget(budget_id) {
+    return {
+        type: DELETE_BUDGET,
+        payload: post(`/api/budget${budget_id}`)
+    }
+}
+
+/* ------------------------------------------- */
+/* ------------------ Kids ------------------- */
+/* ------------------------------------------- */
 
 export function getKidBudget() {
     return {
@@ -36,7 +70,14 @@ export function getKidBudget() {
 export function postKidBudget(budget) {
     return {
         type: POST_KID_BUDGET,
-        playload: post('/api/kid/purchased', { budget })
+        playload: post('/api/kid/purchased', budget)
+    }
+}
+
+export function updateKidBudget(purchase_id, budget) {
+    return {
+        type: UPDATE_KID_BUDGET,
+        playload: post(`/api/kid/purchase/${purchase_id}`, budget)
     }
 }
 
@@ -47,9 +88,27 @@ export default function budgetReducer(state = initialState, action) {
         case GET_BUDGET + "_PENDING": return { ...state, isLoading: true, isError: false }
         case GET_BUDGET + "_FULFILLED": return { ...state, budget: payload.data, isLoading: false }
         case GET_BUDGET + "_REJECTED": return { ...state, isLoading: false, isError: true, errorMessage: payload.response.data }
+        case GET_ALL_BUDGET + "_PENDING": return { ...state, isLoading: true, isError: false }
+        case GET_ALL_BUDGET + "_FULFILLED": return { ...state, budget: payload.data, isLoading: false }
+        case GET_ALL_BUDGET + "_REJECTED": return { ...state, isLoading: false, isError: true, errorMessage: payload.response.data }
+        case POST_BUDGET + "_PENDING": return { ...state, isLoading: true, isError: false }
+        case POST_BUDGET + "_FULFILLED": return { ...state, budget: payload.data, isLoading: false }
+        case POST_BUDGET + "_REJECTED": return { ...state, isLoading: false, isError: true, errorMessage: payload.response.data }
+        case UPDATE_BUDGET + "_PENDING": return { ...state, isLoading: true, isError: false }
+        case UPDATE_BUDGET + "_FULFILLED": return { ...state, budget: payload.data, isLoading: false }
+        case UPDATE_BUDGET + "_REJECTED": return { ...state, isLoading: false, isError: true, errorMessage: payload.response.data }
+        case DELETE_BUDGET + "_PENDING": return { ...state, isLoading: true, isError: false }
+        case DELETE_BUDGET + "_FULFILLED": return { ...state, budget: payload.data, isLoading: false }
+        case DELETE_BUDGET + "_REJECTED": return { ...state, isLoading: false, isError: true, errorMessage: payload.response.data }
         case GET_KID_BUDGET + "_PENDING": return { ...state, isLoading: true, isError: false }
         case GET_KID_BUDGET + "_FULFILLED": return { ...state, budget: payload.data, isLoading: false }
         case GET_KID_BUDGET + "_REJECTED": return { ...state, isLoading: false, isError: true, errorMessage: payload.response.data }
+        case POST_KID_BUDGET + "_PENDING": return { ...state, isLoading: true, isError: false }
+        case POST_KID_BUDGET + "_FULFILLED": return { ...state, budget: payload.data, isLoading: false }
+        case POST_KID_BUDGET + "_REJECTED": return { ...state, isLoading: false, isError: true, errorMessage: payload.response.data }
+        case UPDATE_KID_BUDGET + "_PENDING": return { ...state, isLoading: true, isError: false }
+        case UPDATE_KID_BUDGET + "_FULFILLED": return { ...state, budget: payload.data, isLoading: false }
+        case UPDATE_KID_BUDGET + "_REJECTED": return { ...state, isLoading: false, isError: true, errorMessage: payload.response.data }
 
         default: return state
     }
