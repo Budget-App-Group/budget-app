@@ -5,51 +5,58 @@ const express = require("express"),
   kidCtrl = require("./controllers/kidController"),
   parentCtrl = require("./controllers/parentController"),
   authCtrl = require("./controllers/authController"),
-  middleCtrl = require('./middlewareControllers/middleControllers'),
-  mailCtrl = require("./controllers/nodeMailerController"), // added for nodemailer contact form
-const socketio = require("socket.io")
-const http = require("http")
-const router = require("./router")
+  middleCtrl = require("./middlewareControllers/middleControllers"),
+  mailCtrl = require("./controllers/nodeMailerController"); // added for nodemailer contact form
+const socketio = require("socket.io");
+const http = require("http");
+const router = require("./router");
+
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env,
   app = express();
 
 app.use(express.json());
-app.use(router)
+app.use(router);
 
-const server = http.createServer(app)
-const io = socketio(server)
+const server = http.createServer(app);
+const io = socketio(server);
 
 io.on("connection", (socket) => {
-  console.log("User connected")
+  console.log("User connected");
 
   socket.on("disconnect", () => {
-    console.log("user has left")
-  })
-})
-
+    console.log("user has left");
+  });
+});
 
 /* ------- Auth -------- */
-app.post('/auth/login', authCtrl.login)
-app.post('/auth/logout', authCtrl.logout)
-app.post('/auth/register', authCtrl.register)
-app.get('/auth/check', authCtrl.getUser)
+app.post("/auth/login", authCtrl.login);
+app.post("/auth/logout", authCtrl.logout);
+app.post("/auth/register", authCtrl.register);
+app.get("/auth/check", authCtrl.getUser);
 
 /* -------- Parents -------- */
 
-app.get('/api/budget/:user_id', middleCtrl.isAdmin, parentCtrl.getBudget)
-app.post('/api/admin/budget', middleCtrl.isAdmin, parentCtrl.postBudget)
-app.put('/api/admin/budget/:budget_id', middleCtrl.isAdmin, parentCtrl.updateBudget)
-app.delete('/api/admin/budget/:budget_id', middleCtrl.isAdmin, parentCtrl.deleteBudget)
+app.get("/api/budget/:user_id", middleCtrl.isAdmin, parentCtrl.getBudget);
+app.post("/api/admin/budget", middleCtrl.isAdmin, parentCtrl.postBudget);
+app.put(
+  "/api/admin/budget/:budget_id",
+  middleCtrl.isAdmin,
+  parentCtrl.updateBudget
+);
+app.delete(
+  "/api/admin/budget/:budget_id",
+  middleCtrl.isAdmin,
+  parentCtrl.deleteBudget
+);
 
 /* -------- Kids --------- */
 
-app.get('/api/kid/budget:user_id', middleCtrl.isUser, kidCtrl.getBudget)
-app.post('/api/kid/purchased/:user_id', middleCtrl.isUser, kidCtrl.postBudget)
-app.put('/api/kid/pruchased/:user_id', middleCtrl.isUser, kidCtrl.updateBudget)
+app.get("/api/kid/budget:user_id", middleCtrl.isUser, kidCtrl.getBudget);
+app.post("/api/kid/purchased/:user_id", middleCtrl.isUser, kidCtrl.postBudget);
+app.put("/api/kid/pruchased/:user_id", middleCtrl.isUser, kidCtrl.updateBudget);
 
 // Nodemailer for contact form
 app.post(`/api/mailer`, mailCtrl.sendEmail); // nodemailer contact form from ContactUs.js
-
 
 app.use(
   session({
@@ -69,7 +76,9 @@ massive({
 }).then((dbObj) => {
   app.set("db", dbObj);
   console.log("<---------- Database connected ---------->");
-  io = socket(app.listen(SERVER_PORT, () =>
-    console.log(`<---- Server running on port => ${SERVER_PORT} ---->`))
+  io = socket(
+    app.listen(SERVER_PORT, () =>
+      console.log(`<---- Server running on port => ${SERVER_PORT} ---->`)
+    )
   );
 });
