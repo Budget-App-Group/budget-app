@@ -18,7 +18,7 @@ export default (
     <Route path="/contactus" component={ContactUs} />
     <Route path="/chat" component={Join} />
     <Route path="/chat" component={Chat} />
-    
+
     <Route path="/kidregister" component={KidRegister} />
   </Switch>
 );

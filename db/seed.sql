@@ -5,18 +5,34 @@ user_password VARCHAR (255),
 user_email VARCHAR (255)
 );
 
+CREATE TABLE kid_users (
+    kid_id SERIAL PRIMARY KEY,
+    kid_username VARCHAR(255),
+    kid_password VARCHAR(255)
+);
+
 CREATE TABLE account (
 user_id INT,
 FOREIGN KEY (user_id) REFERENCES users (user_id),
 first_name VARCHAR (200),
 last_name VARCHAR (200),
-user_pic VARCHAR (500)
+user_pic BYTEA
+);
+
+CREATE TABLE kid_account (
+    kid_id INT,
+    FOREIGN KEY (kid_id) REFERENCES kid_users (kid_id),
+    first_name VARCHAR(200),
+    last_name VARCHAR(200),
+    kid_pic BYTEA
 );
 
 CREATE TABLE budget (
-budget_id INT,
+budget_id SERIAL PRIMARY KEY,
 user_id INT,
 FOREIGN KEY (user_id) REFERENCES users(user_id),
+kid_id INT,
+FOREIGN KEY (kid_id) REFERENCES kid_users(kid_id),
 starting_balance INT,
 remaining_balance INT
 );
@@ -28,15 +44,18 @@ is_admin BOOLEAN,
 is_kid BOOLEAN
 );
 
-
-CREATE TABLE roles (
-    parent_id INT,
-    kid_id INT
+CREATE TABLE purchases (
+    purchase_id SERIAL PRIMARY KEY,
+    kid_id INT,
+    FOREIGN KEY (kid_id) REFERENCES kid_users(kid_id),
+    amount INT,
+    activity VARCHAR(250),
+    summary TEXT,
+    receipt_img BYTEA
 );
 
 CREATE TABLE family (
     parent_id INT,
-    FOREIGN KEY(parent_id) REFERENCES roles(parent_id),
-    child_id INT,
-    FOREIGN KEY(child_id) REFERENCES roles(kid_id)
+    FOREIGN KEY(parent_id) REFERENCES users(user_id),
+    child_id INT []
 );

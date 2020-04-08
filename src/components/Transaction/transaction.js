@@ -10,8 +10,8 @@ class Transaction extends Component {
     }
 
     componentDidMount() {
-        if(this.props.user.isAdmin) {
-            
+        if (this.props.user.isAdmin) {
+
         }
         else {
 
@@ -19,8 +19,8 @@ class Transaction extends Component {
     }
 
     transactionAdmin() {
-        if(this.props.user.isAdmin) {
-            
+        if (this.props.user.isAdmin) {
+
         }
     }
 
@@ -41,4 +41,4 @@ const mapStateToProps = reduxState => {
     }
 }
 
-export default connect(mapStateToProps, {  })(Transaction)
+export default connect(mapStateToProps, {})(Transaction)

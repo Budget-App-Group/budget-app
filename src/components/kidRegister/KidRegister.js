@@ -8,6 +8,7 @@ class KidRegister extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      kids: {},
       userName: "",
       password: "",
     };
@@ -40,20 +41,22 @@ class KidRegister extends Component {
         <div className="kid-inputs">
           <input
             placeholder="Enter Kid Username"
-            name="userName"
-            onChange={this.handleInput}
+            onChange={event => this.props.inputUsernameFN(event, this.props.id)}
+
           />
           <input
             type="password"
             placeholder="Enter Kid Password"
-            name="password"
-            onChange={this.handleInput}
+            onChange={event => this.props.inputPasswordFN(event, this.props.id)}
           />
+          {this.props.id > 0 ? 
+            <button onClick={() => this.props.deleteKidFN(this.props.id)}>delete kid</button>
+           : null }
         </div>
 
-        <button onClick={this.handleRegister} className="kid-button">
+        {/* <button onClick={this.handleRegister} className="kid-button">
           Register Kid
-        </button>
+        </button> */}
       </div>
     );
   }
