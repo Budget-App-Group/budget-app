@@ -43,7 +43,7 @@ export function postKidBudget(budget) {
 export default function budgetReducer(state = initialState, action) {
     const { type, payload } = action
 
-    switch(type) {
+    switch (type) {
         case GET_BUDGET + "_PENDING": return { ...state, isLoading: true, isError: false }
         case GET_BUDGET + "_FULFILLED": return { ...state, budget: payload.data, isLoading: false }
         case GET_BUDGET + "_REJECTED": return { ...state, isLoading: false, isError: true, errorMessage: payload.response.data }
