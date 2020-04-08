@@ -34,15 +34,6 @@ class Auth extends Component {
     // }).then(res => {
   };
 
-  Login = (event) => {
-    event.preventDefault();
-    this.props.login(this.state.email, this.state.password);
-    // axios.post('/auth/login', {
-    //     email: this.state.email,
-    //     password: this.state.password
-    // }).then(res => {
-  };
-
   render() {
     return ( 
       <div className = "app-body" >

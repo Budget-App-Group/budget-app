@@ -5,14 +5,21 @@ import {connect} from 'react-redux'
 import { register } from '../../redux/userReducer'
 import {Link} from 'react-router-dom'
 
+import KidRegister from '../kidRegister/KidRegister'
+
 
 class Register extends Component {
     constructor() {
       super();
       this.state = {
+        kids: [{}],
         email: "",
-        password: ""
+        password: "",
+        kidUsername: "",
+        kidPassword: ""
       };
+
+      // this.deleteKidClicked = this.deleteKidClicked.bind(this)
     }
   
     handleInput = event => {
@@ -20,20 +27,70 @@ class Register extends Component {
         [event.target.name]: event.target.value
       });
     };
+
+    kidUsernameInput = (event, id) => {
+      // let { username } = this.state.kids[id]
+      // username = event.target.value
+      this.setState({
+        kidUsername: event.target.value
+      })
+    }
+    kidPasswordInput = (event, id) => {
+      // let { password } = this.state.kids[id]
+      // password = event.target.value
+      this.setState({
+        kidPassword: event.target.value
+      })
+    }
     
+    // kidHandleInput = (kUsername, kPassword, id) => {
+    //   let { username, password } = this.state.kids[id]
+    //   username = kUsername
+    //   password = kPassword
+    //   this.setState({
+    //     kids: [...this.state.kids, {username, password}]
+    //   })
+    // }
     handleRegister = () => {
       console.log(this.state)
       const { email, password } = this.state;
-      axios.post('/api/register', {
-          email,
-          password
-        }).then(res => {
-          this.props.getUser(res.data);
-          this.props.history.push('/');
-        }).catch(err => console.log(err));
+      
+      // this.props.register(email, password)
+      // axios.post('/api/register', {
+      //     email,
+      //     password
+      //   }).then(res => {
+      //     this.props.getUser(res.data);
+      //     this.props.history.push('/');
+      //   }).catch(err => console.log(err));
     };
 
+    addKidClicked = () => {
+      this.setState({
+        kids: [ ...this.state.kids, {username: this.state.kidUsername, password: this.state.kidPassword} ]
+      })
+    }
+
+    // deleteKidClicked = id => {
+    //   console.log('delete: ' + id)
+    //   // console.log("Removed: " + this.state.kids.splice(id, 1))
+    //   this.setState({
+    //     kids: this.state.kids.length >= 0 ? this.state.kids.splice(id, 1) : []
+    //   })
+    //   console.log(this.state.kids)
+    // }
+
   render() {
+    const addKids = this.state.kids.map((kid, i) => {
+      console.log("kid: " + i)
+      return (
+        <KidRegister key={i} 
+          id={i}
+          inputUsernameFN={this.kidUsernameInput}
+          inputPasswordFN={this.kidPasswordInput}
+        />
+      )
+    })
     return (
       <div className="app-body">
         <div className="input-container">
@@ -56,6 +113,11 @@ class Register extends Component {
             <button onClick={this.handleRegister} className="button">
               Register
             </button>
+          </div>
+          <div>
+            <h3>Kid Register</h3>
+            {addKids}
+            <button onClick={this.addKidClicked}>add kid</button>
           </div>
           <div className="flex-horizontal link">
             <span>Already have an account? login here: </span>
