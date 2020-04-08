@@ -5,34 +5,34 @@ import "./Auth.scss";
 import { Link } from "react-router-dom";
 
 class Auth extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: "",
-      // user_id: "" don't need user_id this component
-    };
-  }
-  componentDidUpdate(prevProp) {
-    if (this.props.user.user_id !== prevProp.user.user_id) {
-      this.props.history.push('/')
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: "",
+            password: "",
+            // user_id: "" don't need user_id this component
+        };
     }
-  }
+    componentDidUpdate(prevProp) {
+        if (this.props.user.user_id !== prevProp.user.user_id) {
+            this.props.history.push('/')
+        }
+    }
 
-  handleInput = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
+    handleInput = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
 
-  Login = event => {
-    event.preventDefault();
-    this.props.login(this.state.email, this.state.password)
-    // axios.post('/auth/login', {
-    //     email: this.state.email,
-    //     password: this.state.password
-    // }).then(res => {
-  };
+    Login = event => {
+        event.preventDefault();
+        this.props.login(this.state.email, this.state.password)
+        // axios.post('/auth/login', {
+        //     email: this.state.email,
+        //     password: this.state.password
+        // }).then(res => {
+    };
 
   render() {
     return ( 
@@ -60,10 +60,10 @@ class Auth extends Component {
 }
 
 const mapStateToProps = reduxState => {
-  const { user } = reduxState.user
-  return {
-    user
-  }
+    const { user } = reduxState.user
+    return {
+        user
+    }
 }
 
 export default connect(mapStateToProps, { login })(Auth)
