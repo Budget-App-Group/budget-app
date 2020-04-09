@@ -11,6 +11,10 @@ CREATE TABLE kid_users (
     kid_password VARCHAR(255)
 );
 
+-- CREATE TABLE kids(
+    
+-- )
+
 CREATE TABLE account (
 user_id INT,
 FOREIGN KEY (user_id) REFERENCES users (user_id),
@@ -40,8 +44,7 @@ remaining_balance INT
 CREATE TABLE control (
 user_id INT,
 FOREIGN KEY (user_id) REFERENCES users(user_id),
-is_admin BOOLEAN,
-is_kid BOOLEAN
+is_admin BOOLEAN
 );
 
 CREATE TABLE purchases (
