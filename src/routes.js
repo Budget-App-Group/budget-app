@@ -7,7 +7,7 @@ import UserDashboard from "./components/userDash/UserDashboard";
 import ContactUs from "./components/contactUs/ContactUs";
 import Join from "./components/Join/Join"
 import Chat from "./components/Chat/Chat"
-import KidRegister from "./components/kidRegister/KidRegister";
+import KidRegister from "./components/Register/KidRegister";
 
 export default (
   <Switch>

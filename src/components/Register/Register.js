@@ -1,11 +1,11 @@
 
 import React, {Component} from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import {connect} from 'react-redux'
 import { register } from '../../redux/userReducer'
 import {Link} from 'react-router-dom'
 
-import KidRegister from '../kidRegister/KidRegister'
+import KidRegister from './KidRegister'
 
 
 class Register extends Component {
@@ -13,6 +13,8 @@ class Register extends Component {
       super();
       this.state = {
         kids: [{}],
+        firstName: "",
+        lastName: "",
         email: "",
         password: "",
         kidUsername: "",
@@ -53,9 +55,9 @@ class Register extends Component {
     // }
     handleRegister = () => {
       // console.log(this.state)
-      const { email, password } = this.state;
+      // const { firstName, lastName, email, password } = this.state;
       
-      // this.props.register(email, password)
+      this.props.register(this.state)
       // axios.post('/api/register', {
       //     email,
       //     password
@@ -82,7 +84,6 @@ class Register extends Component {
 
   render() {
     const addKids = this.state.kids.map((kid, i) => {
-      console.log("kid: " + i)
       return (
         <KidRegister key={i} 
           id={i}
@@ -96,6 +97,18 @@ class Register extends Component {
         <div className="input-container">
           <div className="flex-horizontal inputs">
             <div className="flex-vertical">
+              <input
+                maxLength="100"
+                placeholder="Enter First Name"
+                name="firstName"
+                onChange={this.handleInput}
+              />
+              <input
+                maxLength="100"
+                placeholder="Enter Last Name"
+                name="lastName"
+                onChange={this.handleInput}
+              />
               <input
                 maxLength="100"
                 placeholder="Enter Email"

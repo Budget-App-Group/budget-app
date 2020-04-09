@@ -79,6 +79,15 @@ io.on("connect", (socket) => {
     }
   })
 });
+    app.use(
+      session({
+        resave: false,
+        saveUninitialized: true,
+        rejectUnauthorized: false,
+        cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+        secret: SESSION_SECRET,
+      })
+    );
 
 /* ------- Auth -------- */
 app.post("/auth/login", authCtrl.login);
@@ -123,6 +132,7 @@ massive({
 }).then((dbObj) => {
   app.set("db", dbObj);
   console.log("<---------- Database connected ---------->");
+
   (app.listen(SERVER_PORT, () =>
     console.log(`<---- Server running on port => ${SERVER_PORT} ---->`)
   ));
