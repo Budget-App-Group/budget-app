@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./adminDashboard.scss";
 
+
 function AdminDashboard() {
   return (
     <div className="admin-dash-main">

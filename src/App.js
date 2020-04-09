@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import Logout from "./components/Logout/Logout"
 // import {Route} from 'react-router-dom';
 
 function App(props) {
@@ -17,7 +18,8 @@ function App(props) {
         <>{routes}</>
       ) : (
           <>
-            <Header />
+          
+            <Header /> <Logout/>
             {routes}
             <Footer />
           </>
