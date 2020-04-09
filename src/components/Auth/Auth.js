@@ -34,38 +34,29 @@ class Auth extends Component {
         // }).then(res => {
     };
 
-    Login = (event) => {
-        event.preventDefault();
-        this.props.login(this.state.email, this.state.password);
-        // axios.post('/auth/login', {
-        //     email: this.state.email,
-        //     password: this.state.password
-        // }).then(res => {
-    };
-
-    render() {
-        return (
-            <div className="app-body" >
-                <input maxLength="100"
-                    placeholder="Enter Email"
-                    name="email"
-                    onChange={this.handleInput}
-                />
-                <input type="password"
-                    maxLength="20"
-                    placeholder="Enter Password"
-                    name="password"
-                    //#does the same thing as line 44
-                    onChange={e => { this.handleInput(e); }}
-                />
-                <button onClick={this.Login} className="dash-button" >Log in</button>
-                <div className="flex-horizontal link" >
-                    <span > Don 't have an account? Register here: </span>
-                    <Link to="/register" className="input-container-button" >Register</Link>{/* 54H */}
-                </div>
-            </div>
-        );
-    }
+  render() {
+    return ( 
+      <div className = "app-body" >
+        <input maxLength = "100"
+          placeholder = "Enter Email"
+          name = "email"
+          onChange = { this.handleInput }
+        /> 
+        <input type = "password"
+          maxLength = "20"
+          placeholder = "Enter Password"
+          name = "password"
+          //#does the same thing as line 44
+          onChange = { e => { this.handleInput(e); } }
+        /> 
+        <button onClick = { this.Login } className = "dash-button" >Log in</button> 
+        <div className = "flex-horizontal link" >
+          <span > Don 't have an account? Register here: </span> 
+          <Link to = "/register" className = "input-container-button" >Register</Link>{/* 54H */ } 
+        </div> 
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = reduxState => {

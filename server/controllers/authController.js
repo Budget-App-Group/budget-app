@@ -27,7 +27,7 @@ module.exports = {
   },
 
   register: async (req, res) => {
-    const { email, password, isAdmin, isKid } = req.body;
+    const { email, password, kids } = req.body;
     const { session } = req;
     const db = req.app.get("db");
 
@@ -43,19 +43,14 @@ module.exports = {
     let newUser = await db.register_user({ hash, email });
     newUser = newUser[0];
 
-    const user_id = newUser.user_id;
-
-    let newUserControl = await db.post_user_control({
-      user_id,
-      isAdmin,
-      isKid,
-    });
-    newUserControl = newUserControl[0];
-
+    for(let i = 1; i > kids.length; i++) {
+      const kidHash = bcrypt.hashSync(kids[i].password, salt)
+      const kidUsername = kids[i].username
+      await db.register_kid({kidHash, kidUsername})
+    }
     session.user = {
-      email: newUser.email,
-      isAdmin: newUserControl.isAdmin,
-      isKid: newUserControl.isKid,
+      userId: newUser.user_id,
+      email: newUser.email
     };
 
     res.status(201).send(session.user);
