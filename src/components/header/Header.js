@@ -34,11 +34,15 @@ export default class Header extends Component {
           className="dropdown"
           style={{ background: "white", width: "100px" }}
         >
-          <div className="head-button" onClick={this.showDropdownMenu}>
+          <div
+            className="head-button"
+            data-testid="menu-button"
+            onClick={this.showDropdownMenu}
+          >
             Menu
           </div>
           {this.state.displayMenu ? (
-            <ul>
+            <ul data-testid="dropdown">
               <li>
                 <Link to="/admindashboard">Dashboard</Link>
               </li>
