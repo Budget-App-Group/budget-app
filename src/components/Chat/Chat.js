@@ -28,7 +28,11 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState("");
 >>>>>>> e15e703867ae5884a2f6f0a53ffa00e414c50a8a
   const [messages, setMessages] = useState([]);
+<<<<<<< HEAD
+  const ENDPOINT = 'http://localhost:4242';
+=======
   const ENDPOINT = "https://localhost:4242";
+>>>>>>> master
 
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
