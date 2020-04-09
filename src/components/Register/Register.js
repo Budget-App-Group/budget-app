@@ -28,14 +28,14 @@ class Register extends Component {
       });
     };
 
-    kidUsernameInput = (event, id) => {
+    kidUsernameInput = (event) => {
       // let { username } = this.state.kids[id]
       // username = event.target.value
       this.setState({
         kidUsername: event.target.value
       })
     }
-    kidPasswordInput = (event, id) => {
+    kidPasswordInput = (event) => {
       // let { password } = this.state.kids[id]
       // password = event.target.value
       this.setState({
@@ -52,7 +52,7 @@ class Register extends Component {
     //   })
     // }
     handleRegister = () => {
-      console.log(this.state)
+      // console.log(this.state)
       const { email, password } = this.state;
       
       // this.props.register(email, password)
