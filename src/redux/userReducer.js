@@ -32,10 +32,10 @@ export function logout() {
     }
 }
 
-export function register(email, password) {
+export function register(register) {
     return {
         type: REGISTER,
-        payload: post('/auth/register', { email, password })
+        payload: post('/auth/register', register)
     }
 }
 

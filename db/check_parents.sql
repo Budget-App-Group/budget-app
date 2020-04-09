@@ -1,0 +1,2 @@
+-- SELECT u.email, c.isAdmin, c.isKid FROM users u JOIN control c on u.user_id = c.user_id WHERE u.user_email = $1;
+select parents_id, first_name, last_name, user_pic, user_email from parents p join users u on u.user_id = p.parents_id where user_id = $1;

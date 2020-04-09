@@ -1,3 +1,3 @@
-INSERT INTO control(user_id, is_admin, is_kid)
-VALUES(${user_id}, ${isAdmin}, ${isKid})
+INSERT INTO control(user_id, is_admin)
+VALUES(${user_id}, ${isAdmin})
 RETURNING *;

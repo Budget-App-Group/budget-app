@@ -66,6 +66,15 @@ io.on("connection", (socket) => {
     }
   });
 });
+    app.use(
+      session({
+        resave: false,
+        saveUninitialized: true,
+        rejectUnauthorized: false,
+        cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+        secret: SESSION_SECRET,
+      })
+    );
 
 /* ------- Auth -------- */
 app.post("/auth/login", authCtrl.login);
@@ -101,15 +110,6 @@ app.put("/api/kid/pruchased/:user_id", middleCtrl.isUser, kidCtrl.updateBudget);
 // Nodemailer for contact form
 app.post(`/api/mailer`, mailCtrl.sendEmail); // nodemailer contact form from ContactUs.js
 
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: true,
-    rejectUnauthorized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
-    secret: SESSION_SECRET,
-  })
-);
 
 massive({
   connectionString: CONNECTION_STRING,
@@ -119,7 +119,7 @@ massive({
 }).then((dbObj) => {
   app.set("db", dbObj);
   console.log("<---------- Database connected ---------->");
-  io.listen(SERVER_PORT, () =>
+  server.listen(SERVER_PORT, () =>
     console.log(`<---- Server running on port => ${SERVER_PORT} ---->`)
   );
   // );
