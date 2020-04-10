@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import { register } from '../../redux/userReducer'
 import {Link} from 'react-router-dom'
 
-import KidRegister from './KidRegister'
+// import KidRegister from './KidRegister'
 
 
 class Register extends Component {
@@ -56,8 +56,13 @@ class Register extends Component {
     handleRegister = () => {
       // console.log(this.state)
       // const { firstName, lastName, email, password } = this.state;
-      
-      this.props.register(this.state)
+      try {
+        this.props.register(this.state)
+        this.props.history.push('/kidregister')
+      }
+      catch {
+        console.log('failed')
+      }
       // axios.post('/api/register', {
       //     email,
       //     password
@@ -83,15 +88,15 @@ class Register extends Component {
     // }
 
   render() {
-    const addKids = this.state.kids.map((kid, i) => {
-      return (
-        <KidRegister key={i} 
-          id={i}
-          inputUsernameFN={this.kidUsernameInput}
-          inputPasswordFN={this.kidPasswordInput}
-        />
-      )
-    })
+    // const addKids = this.state.kids.map((kid, i) => {
+    //   return (
+    //     <KidRegister key={i} 
+    //       id={i}
+    //       inputUsernameFN={this.kidUsernameInput}
+    //       inputPasswordFN={this.kidPasswordInput}
+    //     />
+    //   )
+    // })
     return (
       <div className="app-body">
         <div className="input-container">
@@ -127,11 +132,11 @@ class Register extends Component {
               Register
             </button>
           </div>
-          <div>
+          {/* <div>
             <h3>Kid Register</h3>
             {addKids}
             <button onClick={this.addKidClicked}>add kid</button>
-          </div>
+          </div> */}
           <div className="flex-horizontal link">
             <span>Already have an account? login here: </span>
             <Link to="/" className="input-container-button">

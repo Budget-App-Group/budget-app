@@ -1,6 +1,7 @@
 import { get, post } from 'axios'
 const initialState = {
     user: {},
+    kids: [],
     isLoading: false,
     isError: false,
     errorMessage: ""
@@ -9,7 +10,9 @@ const initialState = {
 const CHECK_USER = "CHECK_USER",
     LOGIN = "LOGIN",
     LOGOUT = "LOGOUT",
-    REGISTER = "REGISTER"
+    REGISTER = "REGISTER",
+    ADD_KIDS = "ADD_KIDS",
+    KID_REGISTER = "REGISTER"
 
 export function checkUser() {
     return {
@@ -39,6 +42,20 @@ export function register(register) {
     }
 }
 
+export function addKid(kid) {
+    return {
+        type: ADD_KIDS,
+        payload: [...kid]
+    }
+}
+
+export function kidRegister(register) {
+    return {
+        type: KID_REGISTER,
+        payload: post(`/auth/kid/regiseter`, register)
+    }
+}
+
 export default function userReducer(state = initialState, action) {
     const { type, payload } = action
 
@@ -55,6 +72,12 @@ export default function userReducer(state = initialState, action) {
         case REGISTER + "_PENDING": return { ...state, isLoading: true, isError: false }
         case REGISTER + "_FULFILLED": return { ...state, user: payload.data, isLoading: false }
         case REGISTER + "_REJECTED": return { ...state, isLoading: false, isError: true, errorMessage: payload.response.data }
+        case ADD_KIDS + "_PENDING": return { ...state, isLoading: true, isError: false }
+        case ADD_KIDS + "_FULFILLED": return { ...state, kids: payload.data, isLoading: false }
+        case ADD_KIDS + "_REJECTED": return { ...state, isLoading: false, isError: true, errorMessage: "Cannot add kids" }
+        case KID_REGISTER + "_PENDING": return { ...state, isLoading: true, isError: false }
+        case KID_REGISTER + "_FULFILLED": return { ...state, user: payload.data, isLoading: false } 
+        case KID_REGISTER + "_REJECTED": return { ...state, isLoading: false, isError: true, errorMessage: payload.response.data }
 
         default: return state
     }
