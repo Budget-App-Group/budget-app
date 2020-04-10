@@ -100,6 +100,7 @@ app.use(
 app.post("/auth/login", authCtrl.login);
 app.post("/auth/logout", authCtrl.logout);
 app.post("/auth/register", authCtrl.register);
+app.post("/auth/kid/register", authCtrl.kidRegister);
 app.get("/auth/check", authCtrl.getUser);
 
 /* -------- Parents -------- */
