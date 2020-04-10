@@ -12,17 +12,13 @@ const express = require("express"),
   cors = require("cors"),
   app = express(),
   { addUser, removeUser, getUser, getUsersInRoom } = require("./users.js"),
-  { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, } = process.env;
+  { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
-
- 
-  
-  
-  io = socket(app.listen(SERVER_PORT, () =>
+io = socket(
+  app.listen(SERVER_PORT, () =>
     console.log(`<---- Server running on port => ${SERVER_PORT} ---->`)
-  ));
-  
-  
+  )
+);
 
 app.use(express.json());
 
@@ -42,7 +38,7 @@ app.use(
 // const server = http.createServer(app);
 // const io = socket(server);
 
-io.on("connection", socket => {
+io.on("connection", (socket) => {
   socket.on("join", ({ name, room }, callback) => {
     const { error, user } = addUser({ id: socket.id, name, room });
 
@@ -50,22 +46,20 @@ io.on("connection", socket => {
 
     socket.join(user.room);
 
-
     socket.emit("message", {
-      user: 'admin',
+      user: "admin",
       text: `${user.name}, welcome to the room  ${user.room}`,
     });
-    socket.broadcast.to(user.room).emit('message', {
-      user: 'admin',
-      text: `${user.name} has joined!`
+    socket.broadcast.to(user.room).emit("message", {
+      user: "admin",
+      text: `${user.name} has joined!`,
+    });
 
-    });
-    
-    io.to(user.room).emit('roomData', {
+    io.to(user.room).emit("roomData", {
       room: user.room,
-      users: getUsersInRoom(user.room)
+      users: getUsersInRoom(user.room),
     });
-    
+
     callback();
   });
 
@@ -81,20 +75,26 @@ io.on("connection", socket => {
     const user = removeUser(socket.id);
 
     if (user) {
-      io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
-      io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+      io.to(user.room).emit("message", {
+        user: "Admin",
+        text: `${user.name} has left.`,
+      });
+      io.to(user.room).emit("roomData", {
+        room: user.room,
+        users: getUsersInRoom(user.room),
+      });
     }
-  })
+  });
 });
-    app.use(
-      session({
-        resave: false,
-        saveUninitialized: true,
-        rejectUnauthorized: false,
-        cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
-        secret: SESSION_SECRET,
-      })
-    );
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    rejectUnauthorized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+    secret: SESSION_SECRET,
+  })
+);
 
 /* ------- Auth -------- */
 app.post("/auth/login", authCtrl.login);
@@ -105,7 +105,11 @@ app.get("/auth/check", authCtrl.getUser);
 
 /* -------- Parents -------- */
 
-app.get("/api/budget/:user_id", middleCtrl.isParents, parentCtrl.getAllKidBudget);
+app.get(
+  "/api/budget/:user_id",
+  middleCtrl.isParents,
+  parentCtrl.getAllKidBudget
+);
 app.post("/api/admin/budget", middleCtrl.isParents, parentCtrl.postBudget);
 app.put(
   "/api/admin/budget/:budget_id",
@@ -126,11 +130,14 @@ app.post(
   middleCtrl.isLogin,
   kidCtrl.postPurchase
 );
-app.put("/api/kid/pruchased/:user_id", middleCtrl.isLogin, kidCtrl.updateBudget);
+app.put(
+  "/api/kid/purchased/:user_id",
+  middleCtrl.isLogin,
+  kidCtrl.updateBudget
+);
 
 // Nodemailer for contact form
 app.post(`/api/mailer`, mailCtrl.sendEmail); // nodemailer contact form from ContactUs.js
-
 
 massive({
   connectionString: CONNECTION_STRING,
@@ -140,9 +147,4 @@ massive({
 }).then((dbObj) => {
   app.set("db", dbObj);
   console.log("<---------- Database connected ---------->");
-
-
-
-})
-
-
+});

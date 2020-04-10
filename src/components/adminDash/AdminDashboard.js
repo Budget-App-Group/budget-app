@@ -1,17 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { checkUser } from "../../redux/userReducer"
+import { checkUser } from "../../redux/userReducer";
 // import { Link } from "react-router-dom";
-import KidRegister from  '../Register/KidRegister'
+import KidRegister from "../Register/KidRegister";
 import "./adminDashboard.scss";
 
-
 function AdminDashboard(props) {
-
   useEffect(() => {
-    if(!props.user.parentsId) props.history.push('/')
-  }, [props.user, props.history])
-
+    if (!props.user.parentsId) props.history.push("/");
+  }, [props.user, props.history]);
 
   return (
     <div className="admin-dash-main">
@@ -24,11 +21,11 @@ function AdminDashboard(props) {
   );
 }
 
-const mapStateToProps = reduxState => {
-  const { user } = reduxState.user
+const mapStateToProps = (reduxState) => {
+  const { user } = reduxState.user;
   return {
-    user
-  }
-}
+    user,
+  };
+};
 
 export default connect(mapStateToProps, { checkUser })(AdminDashboard);
