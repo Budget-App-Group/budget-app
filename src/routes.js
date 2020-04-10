@@ -16,7 +16,7 @@ export default (
     <Route path="/admindashboard" component={AdminDashboard} />
     <Route path="/userdashboard" component={UserDashboard} />
     <Route path="/contactus" component={ContactUs} />
-    <Route path="/chat" component={Join} />
+    <Route path="/join" component={Join} />
     <Route path="/chat" component={Chat} />
 
     <Route path="/kidregister" component={KidRegister} />

@@ -1,8 +1,9 @@
+  
 const express = require("express");
 const router = express.Router();
 
-router.get("/chat", (req, res) => {
+router.get("/join", (req, res) => {
   res.send({ response: "Server is up and running." }).status(200);
 });
 
-module.exports = router
+module.exports = router;
