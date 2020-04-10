@@ -30,7 +30,7 @@ class KidRegister extends Component {
       })
       .then((res) => {
         this.props.checkUser(res.data);
-        // this.props.history.push("/admindashboard");
+        // this.props.history.push("/userdashboard");
       })
       .catch((err) => console.log(err));
   };
@@ -41,17 +41,22 @@ class KidRegister extends Component {
         <div className="kid-inputs">
           <input
             placeholder="Enter Kid Username"
-            onChange={event => this.props.inputUsernameFN(event, this.props.id)}
-
+            onChange={(event) =>
+              this.props.inputUsernameFN(event, this.props.id)
+            }
           />
           <input
             type="password"
             placeholder="Enter Kid Password"
-            onChange={event => this.props.inputPasswordFN(event, this.props.id)}
+            onChange={(event) =>
+              this.props.inputPasswordFN(event, this.props.id)
+            }
           />
-          {this.props.id > 0 ? 
-            <button onClick={() => this.props.deleteKidFN(this.props.id)}>delete kid</button>
-           : null }
+          {this.props.id > 0 ? (
+            <button onClick={() => this.props.deleteKidFN(this.props.id)}>
+              delete kid
+            </button>
+          ) : null}
         </div>
 
         {/* <button onClick={this.handleRegister} className="kid-button">

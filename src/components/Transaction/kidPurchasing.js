@@ -8,22 +8,20 @@ function KidPurchasing(props) {
   const [activity, setActivity] = useState("");
   const [location, setLocation] = useState({});
   const [summary, setSummary] = useState("");
-//   const [receiptImg, setReceiptImg] = useState("");
-
+  //   const [receiptImg, setReceiptImg] = useState("");
 
   useEffect(() => {
     setLocation({
-        latitude: props.coords ? props.coords.latitude : 0,
-        longitude: props.coords ? props.coords.longitude : 0
-    })
-
-  },[props])
+      latitude: props.coords ? props.coords.latitude : 0,
+      longitude: props.coords ? props.coords.longitude : 0,
+    });
+  }, [props]);
 
   const purchaseSubmit = (event) => {
     event.preventDefault();
 
     const budget = {
-    //   kidId: props.user.userId
+      //   kidId: props.user.userId
       amount,
       activity,
       location,
@@ -33,7 +31,7 @@ function KidPurchasing(props) {
     // props.postKidBudget(budget)
   };
 
-//   const selectOption = location.map();
+  //   const selectOption = location.map();
   return (
     <div className="kid-purchase-constain">
       {!props.isGeolocationAvailable ? (
@@ -42,19 +40,31 @@ function KidPurchasing(props) {
         <div>Geolocation is not enabled</div>
       ) : (
         <form className="kid-purchase-form" onSubmit={purchaseSubmit}>
-          <input
-            type="text"
-            onChange={(event) => setAmount(event.target.value)}
-          />
-          <select onChange={event => setActivity(event.target.value)}>
-            <option></option>
-            {/* {selectOption} */}
-          </select>
-          <input
-            type="text"
-            onChange={(event) => setSummary(event.target.value)}
-          />
-          
+          <div className="amount-input">
+            <label>Amount</label>
+            <input
+              type="text"
+              onChange={(event) => setAmount(event.target.value)}
+            />
+          </div>
+          <div className="purchase-type">
+            <label>Type</label>
+            <select onChange={(event) => setActivity(event.target.value)}>
+              <option>Select Type</option>
+              <option>Gas</option>
+              <option>Food</option>
+              <option>Entertainment</option>
+              {/* {selectOption} */}
+            </select>
+          </div>
+          <div className="purchase-item-name">
+            <label>Item Name</label>
+            <input
+              type="text"
+              onChange={(event) => setSummary(event.target.value)}
+            />
+          </div>
+
           <button type="submit">Purchase</button>
         </form>
       )}
