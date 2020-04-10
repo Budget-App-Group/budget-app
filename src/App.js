@@ -5,12 +5,9 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-<<<<<<< HEAD
 // import KidPurchasing from "./components/Transaction/kidPurchasing"
-=======
-import Logout from "./components/Logout/Logout"
+import Logout from "./components/Logout/Logout";
 // import {Route} from 'react-router-dom';
->>>>>>> master
 
 function App(props) {
   return (
@@ -21,14 +18,13 @@ function App(props) {
       {props.location.pathname === "/" ? (
         <>{routes}</>
       ) : (
-          <>
-          
-            <Header /> <Logout/>
-            {routes}
-            {/* <KidPurchasing /> */}
-            <Footer />
-          </>
-        )}
+        <>
+          <Header /> <Logout />
+          {routes}
+          {/* <KidPurchasing /> */}
+          <Footer />
+        </>
+      )}
     </div>
   );
 }
