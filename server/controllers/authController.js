@@ -14,11 +14,11 @@ module.exports = {
 
     const authenticated = bcrypt.compareSync(password, user.user_password);
     if (authenticated) {
-      console.log('here')
+      // console.log('here')
       let userParents = await db.check_parents([user.user_id]);
 
       userParents = userParents[0];
-      console.log(userParents)
+      // console.log(userParents)
       if(userParents.parents_id) {
         session.user = {
           parentsId: userParents.parents_id,
@@ -89,7 +89,7 @@ module.exports = {
     if (req.session.user) {
       res.status(200).send(req.session.user);
     } else {
-      res.sendStatus(200);
+      res.sendStatus(400);
     }
   },
 };

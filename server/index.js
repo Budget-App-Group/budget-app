@@ -15,10 +15,6 @@ const express = require("express"),
   { addUser, removeUser, getUser, getUsersInRoom } = require("./users.js"),
   { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, CHAT_SERVER } = process.env;
 
-
-
-
-
 app.use(express.json());
 
 //sockets
@@ -97,28 +93,28 @@ app.get("/auth/check", authCtrl.getUser);
 
 /* -------- Parents -------- */
 
-app.get("/api/budget/:user_id", middleCtrl.isAdmin, parentCtrl.getAllKidBudget);
-app.post("/api/admin/budget", middleCtrl.isAdmin, parentCtrl.postBudget);
+app.get("/api/budget/:user_id", middleCtrl.isParents, parentCtrl.getAllKidBudget);
+app.post("/api/admin/budget", middleCtrl.isParents, parentCtrl.postBudget);
 app.put(
   "/api/admin/budget/:budget_id",
-  middleCtrl.isAdmin,
+  middleCtrl.isParents,
   parentCtrl.updateBudget
 );
 app.delete(
   "/api/admin/budget/:budget_id",
-  middleCtrl.isAdmin,
+  middleCtrl.isParents,
   parentCtrl.deleteBudget
 );
 
 /* -------- Kids --------- */
 
-app.get("/api/kid/budget:user_id", middleCtrl.isUser, kidCtrl.getBudget);
+app.get("/api/kid/budget:user_id", middleCtrl.isLogin, kidCtrl.getBudget);
 app.post(
   "/api/kid/purchased/:user_id",
-  middleCtrl.isUser,
+  middleCtrl.isLogin,
   kidCtrl.postPurchase
 );
-app.put("/api/kid/pruchased/:user_id", middleCtrl.isUser, kidCtrl.updateBudget);
+app.put("/api/kid/pruchased/:user_id", middleCtrl.isLogin, kidCtrl.updateBudget);
 
 // Nodemailer for contact form
 app.post(`/api/mailer`, mailCtrl.sendEmail); // nodemailer contact form from ContactUs.js
