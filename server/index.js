@@ -8,16 +8,21 @@ const express = require("express"),
   middleCtrl = require("./middlewareControllers/middleControllers"),
   mailCtrl = require("./controllers/nodeMailerController"), // added for nodemailer contact form
   socket = require("socket.io"),
-  http = require("http"),
   router = require("./router"),
   cors = require("cors"),
   app = express(),
   { addUser, removeUser, getUser, getUsersInRoom } = require("./users.js"),
-  { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, CHAT_SERVER } = process.env;
+  { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, } = process.env;
 
 
-
-
+ 
+  
+  
+  io = socket(server.listen(SERVER_PORT, () =>
+    console.log(`<---- Server running on port => ${SERVER_PORT} ---->`)
+  ));
+  
+  
 
 app.use(express.json());
 
@@ -34,16 +39,17 @@ app.use(
   })
 );
 
-const server = http.createServer(app);
-const io = socket(server);
+// const server = http.createServer(app);
+// const io = socket(server);
 
-io.on("connect", (socket) => {
+io.on("connection", socket => {
   socket.on("join", ({ name, room }, callback) => {
     const { error, user } = addUser({ id: socket.id, name, room });
 
     if (error) return callback(error);
 
     socket.join(user.room);
+
 
     socket.emit("message", {
       user: 'admin',
@@ -52,13 +58,14 @@ io.on("connect", (socket) => {
     socket.broadcast.to(user.room).emit('message', {
       user: 'admin',
       text: `${user.name} has joined!`
-    });
 
+    });
+    
     io.to(user.room).emit('roomData', {
       room: user.room,
       users: getUsersInRoom(user.room)
     });
-
+    
     callback();
   });
 
@@ -133,16 +140,8 @@ massive({
   app.set("db", dbObj);
   console.log("<---------- Database connected ---------->");
 
-  (app.listen(SERVER_PORT, () =>
-    console.log(`<---- Server running on port => ${SERVER_PORT} ---->`)
-  ));
-  // );
-});
 
-server.listen(CHAT_SERVER || 5000, () =>
-  console.log(`Server running on ${CHAT_SERVER}`)
-);
-console.log("Database connected");
 
+})
 
 

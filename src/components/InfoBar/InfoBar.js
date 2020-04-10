@@ -2,6 +2,7 @@ import React from 'react';
 
 import onlineIcon from '../../icons/onlineIcon.png';
 import closeIcon from '../../icons/closeIcon.png';
+import {Link} from 'react-router-dom'
 
 import './InfoBar.css';
 
@@ -12,7 +13,7 @@ const InfoBar = ({ room }) => (
       <h3>{room}</h3>
     </div>
     <div className="rightInnerContainer">
-      <a href="/chat"><img src={closeIcon} alt="close icon" /></a>
+      <Link to="/join"><img src={closeIcon} alt="close icon"></img></Link>
     </div>
   </div>
 );
