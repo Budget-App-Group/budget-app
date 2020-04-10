@@ -1,12 +1,18 @@
 module.exports = {
-    isUser: (req, res, next) => {
+    checkUser: (req, res, next) => {
+        if(req.session.user) {
+            res.status(200).send(req.session.user)
+        }
+        next();
+    },
+    isLogin: (req, res, next) => {
         if(!req.session.user) {
             return res.status(401).send('Please user login')
         }
         next()
     },
-    isAdmin: (req, res, next) => {
-        if(!req.session.user.isAdmin) {
+    isParents: (req, res, next) => {
+        if(!req.session.user.parentsId) {
             return res.status(403).send('You are not adminantion')
         }
         next()
