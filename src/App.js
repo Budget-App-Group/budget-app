@@ -1,32 +1,53 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
 import routes from "./routes";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { checkUser } from "./redux/userReducer";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 // import KidPurchasing from "./components/Transaction/kidPurchasing"
-import Logout from "./components/Logout/Logout";
+// import Logout from "./components/Logout/Logout"
 // import {Route} from 'react-router-dom';
 
-function App(props) {
-  return (
-    <div className="App">
-      {/* props.user.isAdmin */}
-      {console.log(`Is this Admin: ${props.user.isAdmin ? "yes" : "no"}`)}
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-      {props.location.pathname === "/" ? (
-        <>{routes}</>
-      ) : (
-        <>
-          <Header /> <Logout />
-          {routes}
-          {/* <KidPurchasing /> */}
-          <Footer />
-        </>
-      )}
-    </div>
-  );
+  componentDidUpdate(prevProps) {
+    if (this.props.user.email !== prevProps.user.email) {
+      this.props.checkUser();
+    }
+  }
+
+  componentDidMount() {
+    this.props.checkUser();
+    if (this.props.user.parentsId) this.props.history.push("/adminDashboard");
+    if (this.props.user.kidId) this.props.history.push("/userdashboard");
+  }
+
+  render() {
+    return (
+      <div className="App">
+        {/* props.user.isAdmin */}
+        {/* {console.log(`Is this Admin: ${props.user.kidId ? "yes" : "no"}`)} */}
+
+        {/* {props.user ? props.user.parentsId ? props.history.push('/adminDashboard') : props.history.push('/userDashboard') : ( */}
+
+        {this.props.location.pathname === "/" ? (
+          <>{routes}</>
+        ) : (
+          <>
+            <Header />
+            {routes}
+            <Footer />
+          </>
+        )}
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (reduxState) => {
@@ -36,4 +57,4 @@ const mapStateToProps = (reduxState) => {
   };
 };
 
-export default connect(mapStateToProps)(withRouter(App));
+export default connect(mapStateToProps, { checkUser })(withRouter(App));

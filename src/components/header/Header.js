@@ -1,15 +1,23 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { checkUser, logout } from "../../redux/userReducer"
 import { Link } from "react-router-dom";
 import "./header.scss";
 
-export default class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       displayMenu: false,
     };
+    this.logoutClicked = this.logoutClicked.bind(this)
   }
+
+  logoutClicked() {
+    this.props.logout()
+  }
+  
 
   showDropdownMenu = (event) => {
     event.preventDefault();
@@ -27,7 +35,7 @@ export default class Header extends Component {
   render() {
     return (
       <div className="header-main">
-        <div class="title">
+        <div className="title">
           <h1>BudKid</h1>
         </div>
         <div
@@ -53,9 +61,10 @@ export default class Header extends Component {
                 <Link to="/chat">Chat</Link>
               </li>
 
-              {/* <li>
-                <a href="#Log Out">Log Out</a>
-              </li> */}
+              <li>
+                {/* <a href="logut">Log Out</a> */}
+                <div onClick={this.logoutClicked}>Logout</div>
+              </li>
             </ul>
           ) : null}
         </div>
@@ -63,3 +72,12 @@ export default class Header extends Component {
     );
   }
 }
+
+const mapStateToProps = reduxState => {
+  const { user } = reduxState.user
+  return {
+    user
+  }
+}
+
+export default connect(mapStateToProps, { checkUser, logout })(Header)
