@@ -39,10 +39,8 @@ CREATE TABLE kids(
 
 CREATE TABLE budget (
 budget_id SERIAL PRIMARY KEY,
-user_id INT,
-FOREIGN KEY (user_id) REFERENCES users(user_id),
 kid_id INT,
-FOREIGN KEY (kid_id) REFERENCES kid_users(kid_id),
+FOREIGN KEY (kid_id) REFERENCES users(user_id),
 starting_balance INT,
 remaining_balance INT
 );
@@ -58,6 +56,7 @@ CREATE TABLE purchases (
     kid_id INT,
     FOREIGN KEY (kid_id) REFERENCES kid_users(kid_id),
     amount INT,
+    location JSON,
     activity VARCHAR(250),
     summary TEXT,
     receipt_img BYTEA

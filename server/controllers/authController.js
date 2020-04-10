@@ -46,7 +46,7 @@ module.exports = {
   },
 
   register: async (req, res) => {
-    const { email, password, firstName, lastName, kids } = req.body;
+    const { email, password, firstName, lastName} = req.body;
     const { session } = req;
     const db = req.app.get("db");
 
@@ -61,14 +61,6 @@ module.exports = {
 
     let newUser = await db.register_user({ hash, email, firstName, lastName });
     newUser = newUser[0];
- 
-    if (kids) {
-      for(let i = 1; i > kids.length; i++) {
-        const kidHash = bcrypt.hashSync(kids[i].password, salt)
-        const kidUsername = kids[i].username
-        await db.register_kid({kidHash, kidUsername})
-      }
-    }
 
     session.user = {
       parentsId: newUser.parents_id,
@@ -78,6 +70,30 @@ module.exports = {
     };
 
     res.status(201).send(session.user);
+  },
+  kidRegister: async (req, res) => { 
+    const { kids } = req.body;
+    const db = req.app.get("db");
+
+    if (kids) {
+      for(let kid = 0; kid < kids.length; kid++) {
+        const { username, password, firstName, lastName, pic } = kids[kid]
+        console.log('here')
+        let user = await db.get_user([username]);
+        user = user[0];
+        if (user) {
+          return res.status(400).send("User already exists");
+        }
+
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+
+        let newUser = await db.register_user({ hash, username, firstName, lastName, pic });
+        newUser = newUser[0];
+
+        res.sendStatus(200);
+      }
+    }
   },
 
   logout: (req, res) => {

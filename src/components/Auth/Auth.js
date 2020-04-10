@@ -17,6 +17,8 @@ class Auth extends Component {
         if (this.props.user !== prevProp.user) {
             if(this.props.user.parentsId) this.props.history.push('/admindashboard')
             if(this.props.user.kidId) this.props.history.push('/userdashboard')
+
+            console.log(this.props.user)
         }
     }
 
