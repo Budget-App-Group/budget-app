@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { geolocated } from "react-geolocated";
 import { postKidBudget } from "../../redux/budgetReducer";
+import "./kidPurchasing.scss";
 
 function KidPurchasing(props) {
   const [amount, setAmount] = useState(0);
@@ -33,7 +34,8 @@ function KidPurchasing(props) {
 
   //   const selectOption = location.map();
   return (
-    <div className="kid-purchase-constain">
+    <div className="kid-purchase-contain">
+      Add a Purchase
       {!props.isGeolocationAvailable ? (
         <div> Your browser does not support Geolocation</div>
       ) : !props.isGeolocationEnabled ? (
@@ -50,11 +52,11 @@ function KidPurchasing(props) {
           <div className="purchase-type">
             <label>Type</label>
             <select onChange={(event) => setActivity(event.target.value)}>
-              <option>Select Type</option>
-              <option>Gas</option>
-              <option>Food</option>
-              <option>Entertainment</option>
               {/* {selectOption} */}
+              <option>Select Type</option>
+              <option>Food</option>
+              <option>Gas</option>
+              <option>Entertainment</option>
             </select>
           </div>
           <div className="purchase-item-name">
