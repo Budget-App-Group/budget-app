@@ -18,7 +18,7 @@ const express = require("express"),
  
   
   
-  io = socket(server.listen(SERVER_PORT, () =>
+  io = socket(app.listen(SERVER_PORT, () =>
     console.log(`<---- Server running on port => ${SERVER_PORT} ---->`)
   ));
   
