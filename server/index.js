@@ -13,79 +13,80 @@ const express = require("express"),
   app = express(),
   { addUser, removeUser, getUser, getUsersInRoom } = require("./users.js"),
   { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, } = process.env;
-
-
- 
   
   
   io = socket(app.listen(SERVER_PORT, () =>
-    console.log(`<---- Server running on port => ${SERVER_PORT} ---->`)
-  ));
+   console.log(`<---- Server running on port => ${SERVER_PORT} ---->`)
+   ));
+   
+ 
   
   
-
-app.use(express.json());
-
-//sockets
-app.use(router);
-app.use(cors());
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: true,
-    rejectUnauthorized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
-    secret: SESSION_SECRET,
-  })
-);
-
-// const server = http.createServer(app);
-// const io = socket(server);
-
-io.on("connection", socket => {
-  socket.on("join", ({ name, room }, callback) => {
-    const { error, user } = addUser({ id: socket.id, name, room });
-
-    if (error) return callback(error);
-
-    socket.join(user.room);
-
-
-    socket.emit("message", {
-      user: 'admin',
-      text: `${user.name}, welcome to the room  ${user.room}`,
-    });
-    socket.broadcast.to(user.room).emit('message', {
-      user: 'admin',
-      text: `${user.name} has joined!`
-
-    });
+  
+  
+  
+  app.use(express.json());
+  
+  //sockets
+  app.use(router);
+  app.use(cors());
+  app.use(
+    session({
+      resave: false,
+      saveUninitialized: true,
+      rejectUnauthorized: false,
+      cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+      secret: SESSION_SECRET,
+    })
+    );
     
-    io.to(user.room).emit('roomData', {
-      room: user.room,
-      users: getUsersInRoom(user.room)
-    });
+    // const server = http.createServer(app);
+    // const io = socket(server);
     
-    callback();
-  });
-
-  socket.on("sendMessage", (message, callback) => {
-    const user = getUser(socket.id);
-
-    io.to(user.room).emit("message", { user: user.name, text: message });
-
-    callback();
-  });
-
-  socket.on("disconnect", () => {
-    const user = removeUser(socket.id);
-
-    if (user) {
-      io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
-      io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
-    }
-  })
-});
+    io.on("connection", socket => {
+      socket.on("join", ({ name, room }, callback) => {
+        const { error, user } = addUser({ id: socket.id, name, room });
+        
+        if (error) return callback(error);
+        
+        socket.join(user.room);
+        
+        
+        socket.emit("message", {
+          user: 'admin',
+          text: `${user.name}, welcome to the room  ${user.room}`,
+        });
+        socket.broadcast.to(user.room).emit('message', {
+          user: 'admin',
+          text: `${user.name} has joined!`
+          
+        });
+        
+        io.to(user.room).emit('roomData', {
+          room: user.room,
+          users: getUsersInRoom(user.room)
+        });
+        
+        callback();
+      });
+      
+      socket.on("sendMessage", (message, callback) => {
+        const user = getUser(socket.id);
+        
+        io.to(user.room).emit("message", { user: user.name, text: message });
+        
+        callback();
+      });
+      
+      socket.on("disconnect", () => {
+        const user = removeUser(socket.id);
+        
+        if (user) {
+          io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
+          io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+        }
+      })
+    });
     app.use(
       session({
         resave: false,
@@ -94,54 +95,54 @@ io.on("connection", socket => {
         cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
         secret: SESSION_SECRET,
       })
-    );
-
-/* ------- Auth -------- */
-app.post("/auth/login", authCtrl.login);
-app.post("/auth/logout", authCtrl.logout);
-app.post("/auth/register", authCtrl.register);
-app.get("/auth/check", authCtrl.getUser);
-
-/* -------- Parents -------- */
-
-app.get("/api/budget/:user_id", middleCtrl.isParents, parentCtrl.getAllKidBudget);
-app.post("/api/admin/budget", middleCtrl.isParents, parentCtrl.postBudget);
-app.put(
-  "/api/admin/budget/:budget_id",
-  middleCtrl.isParents,
-  parentCtrl.updateBudget
-);
-app.delete(
-  "/api/admin/budget/:budget_id",
-  middleCtrl.isParents,
-  parentCtrl.deleteBudget
-);
-
-/* -------- Kids --------- */
-
-app.get("/api/kid/budget:user_id", middleCtrl.isLogin, kidCtrl.getBudget);
-app.post(
-  "/api/kid/purchased/:user_id",
-  middleCtrl.isLogin,
-  kidCtrl.postPurchase
-);
-app.put("/api/kid/pruchased/:user_id", middleCtrl.isLogin, kidCtrl.updateBudget);
-
-// Nodemailer for contact form
-app.post(`/api/mailer`, mailCtrl.sendEmail); // nodemailer contact form from ContactUs.js
-
-
-massive({
-  connectionString: CONNECTION_STRING,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-}).then((dbObj) => {
-  app.set("db", dbObj);
-  console.log("<---------- Database connected ---------->");
-
-
-
-})
-
-
+      );
+      
+      /* ------- Auth -------- */
+      app.post("/auth/login", authCtrl.login);
+      app.post("/auth/logout", authCtrl.logout);
+      app.post("/auth/register", authCtrl.register);
+      app.get("/auth/check", authCtrl.getUser);
+      
+      /* -------- Parents -------- */
+      
+      app.get("/api/budget/:user_id", middleCtrl.isParents, parentCtrl.getAllKidBudget);
+      app.post("/api/admin/budget", middleCtrl.isParents, parentCtrl.postBudget);
+      app.put(
+        "/api/admin/budget/:budget_id",
+        middleCtrl.isParents,
+        parentCtrl.updateBudget
+        );
+        app.delete(
+          "/api/admin/budget/:budget_id",
+          middleCtrl.isParents,
+          parentCtrl.deleteBudget
+          );
+          
+          /* -------- Kids --------- */
+          
+          app.get("/api/kid/budget:user_id", middleCtrl.isLogin, kidCtrl.getBudget);
+          app.post(
+            "/api/kid/purchased/:user_id",
+            middleCtrl.isLogin,
+            kidCtrl.postPurchase
+            );
+            app.put("/api/kid/pruchased/:user_id", middleCtrl.isLogin, kidCtrl.updateBudget);
+            
+            // Nodemailer for contact form
+            app.post(`/api/mailer`, mailCtrl.sendEmail); // nodemailer contact form from ContactUs.js
+            
+            
+            massive({
+              connectionString: CONNECTION_STRING,
+              ssl: {
+                rejectUnauthorized: false,
+              },
+            }).then((dbObj) => {
+              app.set("db", dbObj);
+              console.log("<---------- Database connected ---------->");
+              
+              
+              
+            })
+            
+            
