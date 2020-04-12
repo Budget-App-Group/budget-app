@@ -47,7 +47,7 @@ class Auth extends Component {
           <div className="auth-email-cont">
             <label className="auth-email-label">Email: </label>
             <input
-              className="auth-email-input"
+              className="auth-input"
               maxLength="100"
               placeholder="Enter Email"
               name="email"
@@ -57,7 +57,7 @@ class Auth extends Component {
           <div className="auth-pass-cont">
             <label className="auth-pass-label">Password: </label>
             <input
-              className="auth-pass-input"
+              className="auth-input"
               type="password"
               maxLength="20"
               placeholder="Enter Password"

@@ -5,4 +5,34 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  background-color: black;
+  color: white;
+}
+
+.auth-inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-input {
+  border-radius: 0;
+  padding: 15px 20px;
+  width: 100%;
+}
+
+.auth-button-container {
+  width: 100%;
+}
+.auth-login-button {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #2979ff;
+  padding: 20px;
+  border-radius: 5px;
+  display: inline-block;
+  border: none;
+  width: 50%;
 }
