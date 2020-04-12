@@ -4,6 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: black;
+  color: white;
 }
 
 .title {
@@ -44,6 +46,7 @@ li {
 
 li:last-child {
   border-bottom: none;
+  color: black;
 }
 
 li:hover {
@@ -54,9 +57,9 @@ li:hover {
 .head-button {
   width: 178px;
   height: 18px;
-  background-color: white;
+  background-color: black;
   padding: 12px;
-  border-radius: 5px;
+  // border-radius: 5px;
   font-weight: bold;
-  color: black;
+  color: white;
 }

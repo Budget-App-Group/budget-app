@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { register } from "../../redux/userReducer";
 import { Link } from "react-router-dom";
+import "./Register.scss";
 
 // import KidRegister from './KidRegister'
 
@@ -99,50 +100,61 @@ class Register extends Component {
     // })
     return (
       <div className="register-body">
+        <div className="register-title">
+          <h1>BudKid</h1>
+        </div>
         <div className="register-input-container">
-          <div className="flex-horizontal inputs">
-            <div className="flex-vertical">
-              <input
-                maxLength="100"
-                placeholder="Enter First Name"
-                name="firstName"
-                onChange={this.handleInput}
-              />
-              <input
-                maxLength="100"
-                placeholder="Enter Last Name"
-                name="lastName"
-                onChange={this.handleInput}
-              />
-              <input
-                maxLength="100"
-                placeholder="Enter Email"
-                name="email"
-                onChange={this.handleInput}
-              />
-              <input
-                type="password"
-                maxLength="20"
-                placeholder="Enter Password"
-                name="password"
-                onChange={this.handleInput}
-              />
-            </div>
-            <button onClick={this.handleRegister} className="button">
+          <div className="register-inputs">
+            <label className="firstname-reg-label">First Name: </label>
+            <input
+              className="register-input"
+              maxLength="100"
+              placeholder="Enter First Name"
+              name="firstName"
+              onChange={this.handleInput}
+            />
+            <label className="lastname-reg-label">Last Name: </label>
+            <input
+              className="register-input"
+              maxLength="100"
+              placeholder="Enter Last Name"
+              name="lastName"
+              onChange={this.handleInput}
+            />
+            <label className="email-reg-label">Email: </label>
+            <input
+              className="register-input"
+              maxLength="100"
+              placeholder="Enter Email"
+              name="email"
+              onChange={this.handleInput}
+            />
+            <label className="Password-reg-label">Password: </label>
+            <input
+              className="register-input"
+              type="password"
+              maxLength="20"
+              placeholder="Enter Password"
+              name="password"
+              onChange={this.handleInput}
+            />
+          </div>
+          <div className="reg-button-container">
+            <button onClick={this.handleRegister} className="reg-button">
               Register
             </button>
           </div>
-          {/* <div>
+        </div>
+        {/* <div>
             <h3>Kid Register</h3>
             {addKids}
             <button onClick={this.addKidClicked}>add kid</button>
           </div> */}
-          <div className="flex-horizontal link">
-            <span>Already have an account? login here: </span>
-            <Link to="/" className="input-container-button">
-              Log in
-            </Link>
-          </div>
+        <div className="flex-horizontal link">
+          <span>Already have an account? login here: </span>
+          <Link to="/" className="input-container-button">
+            Log in
+          </Link>
         </div>
       </div>
     );
