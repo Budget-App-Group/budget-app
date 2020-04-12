@@ -36,7 +36,8 @@ class App extends Component {
 
         {/* {props.user ? props.user.parentsId ? props.history.push('/adminDashboard') : props.history.push('/userDashboard') : ( */}
 
-        {this.props.location.pathname === "/" ? (
+        {this.props.location.pathname === "/" ||
+        this.props.location.pathname === "/register" ? (
           <>{routes}</>
         ) : (
           <>

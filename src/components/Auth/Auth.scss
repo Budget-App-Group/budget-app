@@ -9,17 +9,17 @@
   color: white;
 }
 
-.auth-inputs {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.auth-title {
+  font-size: 2rem;
 }
 
 .auth-input {
   border-radius: 0;
   padding: 15px 20px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .auth-button-container {
