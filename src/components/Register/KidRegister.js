@@ -53,7 +53,6 @@ class KidRegister extends Component {
 
   handleRegisterKid = (event) => {
     event.preventDefault();
-<<<<<<< HEAD
 
     const kids = [...this.state.kids, {
       firstName: this.state.firstName,
@@ -61,11 +60,6 @@ class KidRegister extends Component {
       username: this.state.username,
       password: this.state.password,
     }]
-=======
-    console.log("ParentId: " + 10);
-    console.log(this.state.kids);
-    const kids = this.state.kids;
->>>>>>> master
     // const { userName, password } = this.state;
     // axios
     //   .post("/api/register", {
