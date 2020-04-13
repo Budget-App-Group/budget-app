@@ -11,8 +11,7 @@ const CHECK_USER = "CHECK_USER",
   LOGIN = "LOGIN",
   LOGOUT = "LOGOUT",
   REGISTER = "REGISTER",
-  ADD_KIDS = "ADD_KIDS",
-  KID_REGISTER = "REGISTER";
+  KID_REGISTER = "KID_REGISTER";
 
 export function checkUser() {
   return {
@@ -42,17 +41,10 @@ export function register(register) {
   };
 }
 
-export function addKid(kid) {
-  return {
-    type: ADD_KIDS,
-    payload: [...kid],
-  };
-}
-
-export function kidRegister(register) {
+export function kidRegister(parents_id, kids) {
   return {
     type: KID_REGISTER,
-    payload: post(`/auth/kid/regiseter`, register),
+    payload: post(`/auth/kid/register/${parents_id}`, { kids }),
   };
 }
 
@@ -104,17 +96,6 @@ export default function userReducer(state = initialState, action) {
         isLoading: false,
         isError: true,
         errorMessage: payload.response.data,
-      };
-    case ADD_KIDS + "_PENDING":
-      return { ...state, isLoading: true, isError: false };
-    case ADD_KIDS + "_FULFILLED":
-      return { ...state, kids: payload.data, isLoading: false };
-    case ADD_KIDS + "_REJECTED":
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        errorMessage: "Cannot add kids",
       };
     case KID_REGISTER + "_PENDING":
       return { ...state, isLoading: true, isError: false };

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { connect } from "react-redux";
 import { checkUser, kidRegister } from "../../redux/userReducer";
 // import { Link } from "react-router-dom";
@@ -23,17 +23,10 @@ class KidRegister extends Component {
   };
 
   addKidInfo = () => {
-    if (
-      this.state.firstName &&
-      this.state.lastName &&
-      this.state.username &&
-      this.state.password
-    ) {
+    if (this.state.firstName && this.state.lastName && this.state.username && this.state.password) {
       console.log(this.state.username);
       this.setState({
-        kids: [
-          ...this.state.kids,
-          {
+        kids: [...this.state.kids, {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             username: this.state.username,
@@ -41,11 +34,10 @@ class KidRegister extends Component {
           },
         ],
       })
-        .then((res) => {
-          this.props.checkUser(res.data);
-          // this.props.history.push("/userdashboard");
-        })
-        .catch((err) => console.log(err));
+      // }).then((res) => {
+      //   this.props.checkUser(res.data);
+      //   // this.props.history.push("/userdashboard");
+      // }).catch((err) => console.log(err));
       this.clearInput();
     } else {
       window.alert("Please it out");
@@ -54,7 +46,9 @@ class KidRegister extends Component {
 
   handleRegisterKid = (event) => {
     event.preventDefault();
-    // console.log(this.stat);
+    console.log("ParentId: " + 10)
+    console.log(this.state.kids);
+    const kids = this.state.kids
     // const { userName, password } = this.state;
     // axios
     //   .post("/api/register", {
@@ -66,7 +60,7 @@ class KidRegister extends Component {
     //     // this.props.history.push("/admindashboard");
     //   })
     //   .catch((err) => console.log(err));
-    this.props.kidRegister(this.state.kids);
+    this.props.kidRegister(10, kids);
   };
 
   clearInput() {

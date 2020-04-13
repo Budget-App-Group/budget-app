@@ -1,10 +1,25 @@
 module.exports = {
-    getKidBudget: async (req, res) => {
-        const { user_id } = req.params
+    getKids: async (req, res) => {
+        const { parents_id } = req.params
         const db = req.app.get('db').parents
 
         try {
-            let data = await db.get_kid_budget(user_id)
+            let data = await db.get_kids(parents_id)
+            data = data[0]
+
+            res.status(200).send(data)
+        }
+        catch {
+            res.sendStatus(400)
+        }
+    },
+    getKidBudget: async (req, res) => {
+        const { parents_id } = req.params
+        const { kid_id } = req.body
+        const db = req.app.get('db').parents
+
+        try {
+            let data = await db.get_kid_budget(parents_id, kid_id)
             data = data[0]
 
             res.status(200).send(data)
@@ -15,11 +30,11 @@ module.exports = {
         
     },
     getAllKidBudget: async (req, res) => {
-        const { user_id } = req.params
+        const { parents_id } = req.params
         const db = req.app.get('db').parents
 
         try {
-            let data = await db.get_all_kids_budget(user_id)
+            let data = await db.get_all_kids_budget(parents_id)
             data = data[0]
 
             res.status(200).send(data)
@@ -29,7 +44,7 @@ module.exports = {
         }
     },
     postBudget: async (req, res) => {
-        const { price, user_id } = req.body
+        const { price, kid_id } = req.body
         const db = req.app.get('db').parents
 
         try {
@@ -42,7 +57,7 @@ module.exports = {
     },
     updateBudget: async (req, res) => {
         const { budget_id } = req.params
-        const { price, user_id } = req.body
+        const { price, kid_id } = req.body
         const db = req.app.get('db').parents
 
         try {

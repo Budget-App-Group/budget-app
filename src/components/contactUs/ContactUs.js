@@ -34,16 +34,18 @@ class ContactUs extends Component {
   render() {
     return (
       <div className="contact-main">
-        <h3>Contact Us</h3>
+        <div className="contact-title">
+          <h3>Contact Us</h3>
+        </div>
         <form className="contact-form" onSubmit={() => this.nodeMail()}>
           <div className="name-area">
             <label className="message-name" htmlFor="message-name">
-              Your Name
+              Your Name:
             </label>
             <input
               onChange={this.handleInput}
               name="name"
-              className="message-name"
+              className="message-input"
               type="text"
               placeholder="Your Name"
               value={this.state.name}
@@ -52,12 +54,12 @@ class ContactUs extends Component {
 
           <div className="email-area">
             <label className="message-email" htmlFor="message-email">
-              Your Email
+              Your Email:
             </label>
             <input
               onChange={this.handleInput}
               name="email"
-              className="message-email"
+              className="message-input"
               type="email"
               placeholder="you@email.com"
               required
@@ -67,12 +69,12 @@ class ContactUs extends Component {
 
           <div className="message-area">
             <label className="message-label" htmlFor="message-input">
-              Your Message
+              Your Message:
             </label>
             <textarea
               onChange={this.handleInput}
               name="message"
-              className="message-input"
+              className="message-box"
               type="text"
               placeholder="Please write your message here"
               value={this.state.message}
@@ -81,7 +83,7 @@ class ContactUs extends Component {
           </div>
 
           <div className="submit-button-container">
-            <button type="submit" className="submit-button">
+            <button type="submit" className="submit-contact-button">
               Send Message
             </button>
           </div>

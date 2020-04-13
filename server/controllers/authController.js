@@ -14,12 +14,9 @@ module.exports = {
 
     const authenticated = bcrypt.compareSync(password, user.user_password);
     if (authenticated) {
-      // console.log('here')
       let userParents = await db.check_parents([user.user_id]);
-
       userParents = userParents[0];
-      // console.log(userParents)
-      if(userParents.parents_id) {
+      if(userParents !== undefined) {
         session.user = {
           parentsId: userParents.parents_id,
           firstName: userParents.first_name,
@@ -29,9 +26,9 @@ module.exports = {
       } else {
         let userKid = await db.check_kids([user.user_id]);
         userKid = userKid[0]
-          if (userKid.kid_id){
+          if (userKid){
           session.user = {
-            kidId: userKid.parents_id,
+            kidId: userKid.kid_id,
             firstName: userKid.first_name,
             astName: userKid.last_name,
             email: userKid.user_email
@@ -71,29 +68,31 @@ module.exports = {
 
     res.status(201).send(session.user);
   },
-  kidRegister: async (req, res) => { 
+  kidRegister: async (req, res) => {
+    const { parents_id } = req.params
     const { kids } = req.body;
     const db = req.app.get("db");
-
     if (kids) {
       for(let kid = 0; kid < kids.length; kid++) {
         const { username, password, firstName, lastName, pic } = kids[kid]
-        console.log('here')
+        console.log(username)
         let user = await db.get_user([username]);
         user = user[0];
+        
         if (user) {
           return res.status(400).send("User already exists");
         }
-
+        
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
-
-        let newUser = await db.register_user({ hash, username, firstName, lastName, pic });
+        
+        let newUser = await db.register_kid({ parents_id, hash, username, firstName, lastName, pic });
         newUser = newUser[0];
 
         res.sendStatus(200);
       }
     }
+    res.sendStatus(404)
   },
 
   logout: (req, res) => {
