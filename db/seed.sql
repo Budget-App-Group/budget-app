@@ -63,7 +63,8 @@ CREATE TABLE purchases (
 );
 
 CREATE TABLE family (
-    parent_id INT,
-    FOREIGN KEY(parent_id) REFERENCES users(user_id),
-    children_id INT []
+    parents_id INT,
+    FOREIGN KEY(parents_id) REFERENCES parents(parents_id),
+    kid_id INT,
+    FOREIGN KEY(kid_id) REFERENCES kids(kid_id)
 );
