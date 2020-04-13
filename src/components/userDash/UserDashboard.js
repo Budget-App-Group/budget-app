@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 // import { checkUser } from "../../redux/userReducer";
 // import { Link } from "react-router-dom";
-// import { getKidBudget } from "../../redux/budgetReducer";
+import { getKidBudget } from "../../redux/budgetReducer";
 import KidPurchasing from "./../Transaction/kidPurchasing";
-import { withRouter } from "react-router-dom";
 import "./userDashboard.scss";
 
 function UserDashboard(props) {
-  console.log(props);
+
+  useEffect(() => {
+    if(!props.user.kidId) props.history.push('/')
+    
+  },[props.user, props.history])
+
   return (
     <div className="user-dash-main">
-      <div className="user-name">{props.user.firstName}Kid username</div>
+      <div className="user-name">{props.user.firstName}</div>
       <div className="amount-section">{props.budget.amount}amount left</div>
       <KidPurchasing />
     </div>
@@ -20,9 +24,9 @@ function UserDashboard(props) {
 
 const mapStateToProps = (reduxState) => {
   return {
-    user: reduxState.user,
-    budget: reduxState.budget,
+    user: reduxState.user.user,
+    budget: reduxState.budget.budget,
   };
 };
 
-export default connect(mapStateToProps, {})(withRouter(UserDashboard));
+export default connect(mapStateToProps, { getKidBudget })(UserDashboard);
