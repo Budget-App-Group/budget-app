@@ -1,0 +1,1 @@
+select kid_id, first_name, last_name, user_pic, user_email from kids k join users u on u.user_id = k.kid_id where user_id = $1;

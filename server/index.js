@@ -100,16 +100,17 @@ app.use(
 app.post("/auth/login", authCtrl.login);
 app.post("/auth/logout", authCtrl.logout);
 app.post("/auth/register", authCtrl.register);
-app.post("/auth/kid/register", authCtrl.kidRegister);
+app.post("/auth/kid/register/:parents_id", authCtrl.kidRegister);
 app.get("/auth/check", authCtrl.getUser);
 
 /* -------- Parents -------- */
 
 app.get(
-  "/api/budget/:user_id",
+  "/api/budget/:parents_id",
   middleCtrl.isParents,
   parentCtrl.getAllKidBudget
 );
+app.get("/api/kids/:parents_id", middleCtrl.isParents, parentCtrl.getKids)
 app.post("/api/admin/budget", middleCtrl.isParents, parentCtrl.postBudget);
 app.put(
   "/api/admin/budget/:budget_id",

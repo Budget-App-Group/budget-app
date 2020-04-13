@@ -1,0 +1,1 @@
+SELECT * FROM kids k JOIN family f on k.kid_id = f.kid_id where f.parents_id = $1;
