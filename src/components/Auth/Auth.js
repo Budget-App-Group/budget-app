@@ -84,7 +84,7 @@ class Auth extends Component {
         </div>
       </div>
     );
-  }
+  };
 }
 
 const mapStateToProps = (reduxState) => {
