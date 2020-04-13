@@ -2,7 +2,7 @@ module.exports = {
     getBudget: async (req, res) => {
         const { kid_id } = req.params
         const db = req.app.get('db').kids
-
+        console.log('here')
         try {
             let dataBudget = await db.get_budget(kid_id)
             dataBudget = dataBudget[0]
@@ -13,6 +13,19 @@ module.exports = {
             res.status(400).send('Disconnect')
         }
         
+    },
+    getPurchases: async (req, res) => {
+        const { kid_id } = req.params
+        const db = req.app.get('db').kids
+        try {
+            // console.log('here')
+            let dataPurchase = await db.get_purchase(kid_id)
+            // console.log('Data: ' + dataPurchase)
+            res.status(200).send(dataPurchase)
+        }
+        catch {
+            res.status(400).send("We cannot get history")
+        }
     },
     postPurchase: async (req, res) => {
         const { kid_id } = req.params
