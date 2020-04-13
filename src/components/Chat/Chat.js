@@ -8,8 +8,9 @@ import InfoBar from "../InfoBar/InfoBar";
 import Input from "../input/Input";
 
 import "./Chat.css";
+import { resolveHostname } from "nodemailer/lib/shared";
 
-let socket;
+
 
 const Chat = ({ location }) => {
   const [name, setName] = useState("");
@@ -18,37 +19,36 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const ENDPOINT = "http://localhost:4242";
-
+  
+  const socket = io(ENDPOINT);
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
 
-    socket = io(ENDPOINT);
 
     setRoom(room);
     setName(name);
-
     socket.emit("join", { name, room }, (error) => {
       if (error) {
         alert(error);
+
       }
-    });
-  }, [ENDPOINT, location.search]);
+    })
+  }, [socket, location.search]);
+  socket.on(" New message", ({message, room}) => {
+    setMessages((messages) => [...messages, message]);
+    setRoom((room) => [...room, room])
+  });
 
-  useEffect(() => {
-    socket.on("message", (message) => {
-      setMessages((messages) => [...messages, message]);
-    });
 
-    socket.on("roomData", ({ users }) => {
-      setUsers(users);
-    });
-  }, []);
+  socket.on("roomData", ({ users }) => {
+    setUsers(users);
+  });
 
   const sendMessage = (event) => {
     event.preventDefault();
 
     if (message) {
-      socket.emit("sendMessage", message, () => setMessage(""));
+      socket.emit("sendMessage", message, "sendRoom", room, () => setMessage(""));
     }
   };
 

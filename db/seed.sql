@@ -37,12 +37,11 @@ CREATE TABLE kids(
 --     kid_pic BYTEA
 -- );
 
-CREATE TABLE budget (
-budget_id SERIAL PRIMARY KEY,
-kid_id INT,
-FOREIGN KEY (kid_id) REFERENCES users(user_id),
-starting_balance INT,
-remaining_balance INT
+CREATE TABLE budgets (
+    budget_id SERIAL PRIMARY KEY,
+    kid_id INT,
+    FOREIGN KEY (kid_id) REFERENCES users(user_id),
+    amount_balance INT,
 );
 
 -- CREATE TABLE control (
