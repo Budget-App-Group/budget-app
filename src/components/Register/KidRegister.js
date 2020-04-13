@@ -23,17 +23,24 @@ class KidRegister extends Component {
   };
 
   addKidInfo = () => {
-    if (this.state.firstName && this.state.lastName && this.state.username && this.state.password) {
+    if (
+      this.state.firstName &&
+      this.state.lastName &&
+      this.state.username &&
+      this.state.password
+    ) {
       console.log(this.state.username);
       this.setState({
-        kids: [...this.state.kids, {
+        kids: [
+          ...this.state.kids,
+          {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             username: this.state.username,
             password: this.state.password,
           },
         ],
-      })
+      });
       // }).then((res) => {
       //   this.props.checkUser(res.data);
       //   // this.props.history.push("/userdashboard");
@@ -46,6 +53,7 @@ class KidRegister extends Component {
 
   handleRegisterKid = (event) => {
     event.preventDefault();
+<<<<<<< HEAD
 
     const kids = [...this.state.kids, {
       firstName: this.state.firstName,
@@ -53,6 +61,11 @@ class KidRegister extends Component {
       username: this.state.username,
       password: this.state.password,
     }]
+=======
+    console.log("ParentId: " + 10);
+    console.log(this.state.kids);
+    const kids = this.state.kids;
+>>>>>>> master
     // const { userName, password } = this.state;
     // axios
     //   .post("/api/register", {
