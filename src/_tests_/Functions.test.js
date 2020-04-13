@@ -22,3 +22,13 @@ test("addkid will create a last name", () => {
   const newKid = testAddKidInfo("colby", "dude", "dudebro", "abc123");
   expect(newKid.last.lastName).toBe("dude");
 });
+
+test("addkid will create a  username", () => {
+  const newKid = testAddKidInfo("colby", "dude", "dudebro", "abc123");
+  expect(newKid.user.username).toBe("dudebro");
+});
+
+test("addkid will create a  username", () => {
+  const newKid = testAddKidInfo("colby", "dude", "dudebro", "abc123");
+  expect(newKid.pass.password).toBe("abc123");
+});
