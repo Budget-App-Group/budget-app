@@ -15,10 +15,10 @@ test("addkid will create a random user id", () => {
 
 test("addkid will create a first name", () => {
   const newKid = testAddKidInfo("colby", "dude", "dudebro", "abc123");
-  expect(newKid.first).toBe("colby");
+  expect(newKid.first.firstName).toBe("colby");
 });
 
 test("addkid will create a last name", () => {
   const newKid = testAddKidInfo("colby", "dude", "dudebro", "abc123");
-  expect(newKid.last).toBe("dude");
+  expect(newKid.last.lastName).toBe("dude");
 });
