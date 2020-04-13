@@ -125,14 +125,15 @@ app.delete(
 
 /* -------- Kids --------- */
 
-app.get("/api/kid/budget:user_id", middleCtrl.isLogin, kidCtrl.getBudget);
+app.get("/api/kid/budget/:kid_id", middleCtrl.isLogin, kidCtrl.getBudget);
+app.get("/api/kid/purchase/:kid_id", middleCtrl.isLogin, kidCtrl.getPurchases);
 app.post(
-  "/api/kid/purchased/:user_id",
+  "/api/kid/purchased/:kid_id",
   middleCtrl.isLogin,
   kidCtrl.postPurchase
 );
 app.put(
-  "/api/kid/purchased/:user_id",
+  "/api/kid/purchased/:kid_id",
   middleCtrl.isLogin,
   kidCtrl.updateBudget
 );

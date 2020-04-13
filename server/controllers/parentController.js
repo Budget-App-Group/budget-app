@@ -5,8 +5,6 @@ module.exports = {
 
         try {
             let data = await db.get_kids(parents_id)
-            data = data[0]
-
             res.status(200).send(data)
         }
         catch {
