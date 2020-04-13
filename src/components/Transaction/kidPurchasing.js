@@ -22,26 +22,24 @@ function KidPurchasing(props) {
     event.preventDefault();
 
     const budget = {
-      //   kidId: props.user.userId
       amount,
       activity,
       location,
       summary,
     };
-    console.log(budget);
-    // props.postKidBudget(budget)
+    // console.log(budget);
+    props.postKidBudget(props.user.kidId, budget)
   };
 
   //   const selectOption = location.map();
   return (
-    <div className="kid-purchase-contain">
-      Add a Purchase
+    <section className="kid-purchase-contain">
       {!props.isGeolocationAvailable ? (
         <div> Your browser does not support Geolocation</div>
       ) : !props.isGeolocationEnabled ? (
         <div>Geolocation is not enabled</div>
       ) : (
-        <form className="kid-purchase-form" onSubmit={purchaseSubmit}>
+        <form className="kid-purchase-form" onSubmit={purchaseSubmit} style={{textAlign: 'left', backgroundColor:'lightBlue', padding: '10px', boxShadow: 'black 0 0 5px'}}>
           <div className="amount-input">
             <label>Amount</label>
             <input
@@ -70,7 +68,7 @@ function KidPurchasing(props) {
           <button type="submit">Purchase</button>
         </form>
       )}
-    </div>
+    </section>
   );
 }
 

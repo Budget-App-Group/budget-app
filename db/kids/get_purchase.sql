@@ -1,0 +1,1 @@
+SELECT * FROM purchases WHERE kid_id = $1;
