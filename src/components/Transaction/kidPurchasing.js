@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { geolocated } from "react-geolocated";
-import { postKidBudget } from "../../redux/budgetReducer";
+// import { postKidPurchase } from "../../redux/budgetReducer";
+import { postPurchase } from '../../redux/purchaseReducer'
 import "./kidPurchasing.scss";
 
 function KidPurchasing(props) {
   const [amount, setAmount] = useState(0);
-  const [activity, setActivity] = useState("");
+  const [types, setType] = useState("");
   const [location, setLocation] = useState({});
   const [summary, setSummary] = useState("");
-  //   const [receiptImg, setReceiptImg] = useState("");
+  // const [receiptImg, setReceiptImg] = useState("");
 
   useEffect(() => {
     setLocation({
@@ -23,14 +24,23 @@ function KidPurchasing(props) {
 
     const budget = {
       amount,
-      activity,
+      types,
       location,
-      summary,
+      summary
     };
-    // console.log(budget);
-    props.postKidBudget(props.user.kidId, budget)
+
+    props.postPurchase(props.user.kidId, budget)
+    
+    // props.postKidBudget(props.user.kidId, budget)
   };
 
+  const handleAmount = event => {
+    setAmount(+event.target.value * 100)
+  }
+
+  // const clearInput = () => {
+  //   setAmount(0)
+  // }
   //   const selectOption = location.map();
   return (
     <section className="kid-purchase-contain">
@@ -41,15 +51,16 @@ function KidPurchasing(props) {
       ) : (
         <form className="kid-purchase-form" onSubmit={purchaseSubmit} style={{textAlign: 'left', backgroundColor:'lightBlue', padding: '10px', boxShadow: 'black 0 0 5px'}}>
           <div className="amount-input">
-            <label>Amount</label>
+            <label>Amount: $</label>
             <input
-              type="text"
-              onChange={(event) => setAmount(event.target.value)}
+              type="number"
+              step="0.01"
+              onChange={handleAmount}
             />
           </div>
           <div className="purchase-type">
             <label>Type</label>
-            <select onChange={(event) => setActivity(event.target.value)}>
+            <select onChange={(event) => setType(event.target.value)}>
               {/* {selectOption} */}
               <option>Select Type</option>
               <option>Food</option>
@@ -75,13 +86,15 @@ function KidPurchasing(props) {
 const mapStateToProps = (reduxState) => {
   const { user } = reduxState.user;
   const { budget } = reduxState.budget;
+  const { purchase } = reduxState.purchase;
   return {
     user,
     budget,
+    purchase
   };
 };
 
-export default connect(mapStateToProps, { postKidBudget })(
+export default connect(mapStateToProps, { postPurchase })(
   geolocated({
     positionOptions: {
       enableHighAccuracy: false,
