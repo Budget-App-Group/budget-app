@@ -67,12 +67,12 @@ test("addUser will return any value", () => {
   expect(addedUser.id).toEqual(expect.anything());
 });
 
-test("addUser will return lowercase", () => {
+test("addUser will return lowercase name", () => {
   const addedUser = addUser("Robert", "Robs room");
   expect(addedUser.newName).toEqual("robert");
 });
 
-test("addUser will return lowercase", () => {
+test("addUser will return lowercase room", () => {
   const addedUser = addUser("Robert", "Robs room");
   expect(addedUser.newRoom).toEqual("robs room");
 });
