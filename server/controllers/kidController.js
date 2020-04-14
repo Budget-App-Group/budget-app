@@ -1,13 +1,17 @@
 module.exports = {
     getBudget: async (req, res) => {
         const { kid_id } = req.params
+        const { session } = req
         const db = req.app.get('db').kids
-        console.log('here')
         try {
             let dataBudget = await db.get_budget(kid_id)
             dataBudget = dataBudget[0]
-
-            res.status(200).send(dataBudget)
+            session.budget = {
+                budgetId: dataBudget.budget_id,
+                kidId: dataBudget.kid_id,
+                amount: dataBudget.amount_balance
+            }
+            res.status(200).send(session.budget)
         }
         catch {
             res.status(400).send('Disconnect')
@@ -18,9 +22,7 @@ module.exports = {
         const { kid_id } = req.params
         const db = req.app.get('db').kids
         try {
-            // console.log('here')
             let dataPurchase = await db.get_purchase(kid_id)
-            // console.log('Data: ' + dataPurchase)
             res.status(200).send(dataPurchase)
         }
         catch {
@@ -29,12 +31,12 @@ module.exports = {
     },
     postPurchase: async (req, res) => {
         const { kid_id } = req.params
-        const { price, activity, location, pic, description } = req.body
+        const { amount, types, location, summary } = req.body
         const db = req.app.get('db').kids
 
         try {
-            await db.purchase([kid_id, price, activity, location, pic, description])
-            res.sendStatus(200)
+            let dataPurchase = await db.purchase({kid_id, amount, types, location, summary})
+            res.status(200).send(dataPurchase)
         }
         catch {
             res.sendStatus(500)
@@ -59,7 +61,7 @@ module.exports = {
         const db = req.app.get('db').kids
 
         try {
-            await db.updateBud([budget_id, price])
+            await db.update_budget([budget_id, price])
             res.sendStatus(200)
         }
         catch {
