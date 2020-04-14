@@ -1,7 +1,6 @@
 import { get, post } from "axios";
 const initialState = {
   user: {},
-  kids: [],
   isLoading: false,
   isError: false,
   errorMessage: "",

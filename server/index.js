@@ -126,7 +126,7 @@ app.delete(
 /* -------- Kids --------- */
 
 app.get("/api/kid/budget/:kid_id", middleCtrl.isLogin, kidCtrl.getBudget);
-app.get("/api/kid/purchase/:kid_id", middleCtrl.isLogin, kidCtrl.getPurchases);
+app.get("/api/kid/purchases/:kid_id", middleCtrl.isLogin, kidCtrl.getPurchases);
 app.post(
   "/api/kid/purchased/:kid_id",
   middleCtrl.isLogin,

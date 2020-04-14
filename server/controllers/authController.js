@@ -30,7 +30,7 @@ module.exports = {
           session.user = {
             kidId: userKid.kid_id,
             firstName: userKid.first_name,
-            astName: userKid.last_name,
+            lastName: userKid.last_name,
             email: userKid.user_email
           }
         }

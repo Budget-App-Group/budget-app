@@ -1,30 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { convertToDollor } from '../../math/convert'
 import { connect } from 'react-redux'
-import { getKidPurchase } from '../../redux/budgetReducer'
 
 function KidHistory(props) {
-    const [history, setHistory] = useState([])
 
-    useEffect(() => {
-        setHistory(props.getKidPurchase(props.id))
-    },[props])
+    const purchase = props.purchase.length >= 0 ? props.purchase.map(purchase => {
+        return (
+            <div key={purchase.purchase_id}>
+                <div>
+                    <h2>{purchase.activity}</h2>
+                    <label>${convertToDollor(purchase.amount)}</label>
+                </div>
+                <div>
+                    <button>Edit</button>
+                </div>
+            </div>
+        )
+    }) : <div>No History</div>
 
-    // const purchase = history.map(purchase => {
-    //     return (
-    //         <div key={purchase.purchase_id}>
-    //             <div>
-    //                 <h2>{purchase.activity}</h2>
-    //                 <lable>${purchase.amount}</lable>
-    //             </div>
-    //         </div>
-    //     )
-    // })
     return (
         <div>
             KidHistory:
-            {console.log(history)}
+            { purchase }
         </div>
     )
 }
 
-export default connect (null, { getKidPurchase } )(KidHistory)
+const mapStateToProps = reduxState => {
+    const { purchase } = reduxState.purchase
+    return {
+        purchase
+    }
+}
+export default connect(mapStateToProps)(KidHistory)
