@@ -33,7 +33,7 @@ const Chat = ({ location }) => {
 
       }
     })
-  }, [socket, location.search]);
+  },[location.search]);
   socket.on(" New message", ({message, room}) => {
     setMessages((messages) => [...messages, message]);
     setRoom((room) => [...room, room])
