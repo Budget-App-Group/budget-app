@@ -23,6 +23,7 @@ io = socket(
 app.use(express.json());
 
 //sockets
+
 app.use(router);
 app.use(cors());
 app.use(
@@ -65,6 +66,7 @@ io.on("connection", (socket) => {
 
   socket.on("sendMessage", (message, callback) => {
     const user = getUser(socket.id);
+    console.log(socket.handshake, "hit")
 
     io.to(user.room).emit("message", { user: user.name, text: message });
 
@@ -86,15 +88,6 @@ io.on("connection", (socket) => {
     }
   });
 });
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: true,
-    rejectUnauthorized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
-    secret: SESSION_SECRET,
-  })
-);
 
 /* ------- Auth -------- */
 app.post("/auth/login", authCtrl.login);
@@ -126,7 +119,7 @@ app.delete(
 /* -------- Kids --------- */
 
 app.get("/api/kid/budget/:kid_id", middleCtrl.isLogin, kidCtrl.getBudget);
-app.get("/api/kid/purchase/:kid_id", middleCtrl.isLogin, kidCtrl.getPurchases);
+app.get("/api/kid/purchases/:kid_id", middleCtrl.isLogin, kidCtrl.getPurchases);
 app.post(
   "/api/kid/purchased/:kid_id",
   middleCtrl.isLogin,

@@ -17,7 +17,7 @@ class Auth extends Component {
     if (this.props.user !== prevProp.user) {
       if (this.props.user.parentsId) this.props.history.push("/admindashboard");
       if (this.props.user.kidId) this.props.history.push("/userdashboard");
-            // console.log(this.props.user)
+      // console.log(this.props.user)
     }
   }
 
@@ -74,15 +74,15 @@ class Auth extends Component {
           </button>
         </div>
         <div className="auth-register-link">
-          <span> Don 't have an account? Register here: </span>
-          <Link to="/register" className="input-container-button">
+          <span> Don't have an account? Register here: </span>
+          <Link to="/register" className="auth-register-button">
             Register
           </Link>
           {/* 54H */}
         </div>
       </div>
     );
-  };
+  }
 }
 
 const mapStateToProps = (reduxState) => {

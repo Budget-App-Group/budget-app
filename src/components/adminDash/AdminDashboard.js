@@ -15,14 +15,19 @@ function AdminDashboard(props) {
   }, [props.user, props.history]);
 
   const getKid = parents_id => {
-    axios.get(`/api/kids/${parents_id}`).then(res => {
+    axios.get(`/api/budget/${parents_id}`).then(res => {
       setKids(res.data)
     }).catch(err => console.log(err))
   }
 
   const kid = kids.map(kid => {
     return (
-      <Transaction key={kid.kid_id} kidId={kid.kid_id} firstName={kid.first_name} pic={kid.pic} />
+      <Transaction key={kid.kid_id} 
+        kidId={kid.kid_id} 
+        firstName={kid.first_name} 
+        pic={kid.pic} 
+        amount={kid.amount_balance}
+      />
     )
   })
 
