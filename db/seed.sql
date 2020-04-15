@@ -41,7 +41,7 @@ CREATE TABLE budgets (
     budget_id SERIAL PRIMARY KEY,
     kid_id INT,
     FOREIGN KEY (kid_id) REFERENCES users(user_id),
-    amount_balance INT,
+    amount_balance INT
 );
 
 ALTER TABLE budgets ADD COLUMN balance INT;

@@ -11,13 +11,10 @@ class Register extends Component {
   constructor() {
     super();
     this.state = {
-      kids: [{}],
       firstName: "",
       lastName: "",
       email: "",
-      password: "",
-      kidUsername: "",
-      kidPassword: "",
+      password: ""
     };
 
     // this.deleteKidClicked = this.deleteKidClicked.bind(this)
