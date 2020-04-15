@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import axios from "axios";
 import { connect } from "react-redux";
 import { checkUser, kidRegister } from "../../redux/userReducer";
+import "./kidRegister.scss";
 // import { Link } from "react-router-dom";
 
 class KidRegister extends Component {
@@ -104,37 +105,38 @@ class KidRegister extends Component {
 
   render() {
     const kid = this.state.kids.map((kid, i) => <p key={i}>{kid.firstName}</p>);
-    const { isOld } = this.props.location.state;
+    
+    // const { isOld } = this.props.location.state;
     return (
       <div className="kid-register-main">
         <h1>Kid Register</h1>
         <div>
-          {isOld ? <button onClick={this.goBackClicked}>cancel</button> : null}
+          {/* {isOld ? <button onClick={this.goBackClicked}>cancel</button> : null} */}
         </div>
         <div className="kid-inputs">
           <form onSubmit={this.handleRegisterKid}>
-            <input
+            <input className="kid-firstname"
               type="text"
               name="firstName"
               value={this.state.firstName}
               placeholder="Enter First Name"
               onChange={this.handleInput}
             />
-            <input
+            <input className='kid-lastname'
               type="text"
               name="lastName"
               value={this.state.lastName}
               placeholder="Enter Last Name"
               onChange={this.handleInput}
             />
-            <input
+            <input className='enter-kid-username'
               type="text"
               name="username"
               value={this.state.username}
               placeholder="Enter Kid Username"
               onChange={this.handleInput}
             />
-            <input
+            <input className='enter-kid-pw'
               type="password"
               name="password"
               value={this.state.password}
@@ -142,7 +144,7 @@ class KidRegister extends Component {
               onChange={this.handleInput}
             />
 
-            <button onClick={this.addKidInfo} type="button">
+            <button className='add-kid-bt' onClick={this.addKidInfo} type="button">
               Add kid
             </button>
             <button type="submit">Submit</button>
