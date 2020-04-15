@@ -56,7 +56,6 @@ module.exports = {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
-    console.log('last: ' + lastName)
     let newUser = await db.register_user({ hash, email, firstName, lastName });
     newUser = newUser[0];
 
