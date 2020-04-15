@@ -44,6 +44,8 @@ CREATE TABLE budgets (
     amount_balance INT,
 );
 
+ALTER TABLE budgets ADD COLUMN balance INT;
+
 -- CREATE TABLE control (
 -- user_id INT,
 -- FOREIGN KEY (user_id) REFERENCES users(user_id),
