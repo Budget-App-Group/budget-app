@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot tests Header component component header matches the snapshot 1`] = `
+<div
+  className="header-main"
+>
+  <div
+    className="title"
+    data-testid="title"
+  >
+    <h1>
+      BudKid
+    </h1>
+  </div>
+  <div
+    className="dropdown"
+    style={
+      Object {
+        "background": "white",
+        "width": "100px",
+      }
+    }
+  >
+    <div
+      className="head-button"
+      data-testid="menu-button"
+      onClick={[Function]}
+    >
+      Menu
+    </div>
+  </div>
+</div>
+`;

@@ -49,6 +49,7 @@ class ContactUs extends Component {
               type="text"
               placeholder="Your Name"
               value={this.state.name}
+              required
             />
           </div>
 

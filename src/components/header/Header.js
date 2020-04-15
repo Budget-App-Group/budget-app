@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { checkUser, logout } from "../../redux/userReducer"
+import { checkUser, logout } from "../../redux/userReducer";
 import { Link } from "react-router-dom";
 import "./header.scss";
 
@@ -11,13 +11,12 @@ class Header extends Component {
     this.state = {
       displayMenu: false,
     };
-    this.logoutClicked = this.logoutClicked.bind(this)
+    this.logoutClicked = this.logoutClicked.bind(this);
   }
 
   logoutClicked() {
-    this.props.logout()
+    this.props.logout();
   }
-  
 
   showDropdownMenu = (event) => {
     event.preventDefault();
@@ -35,7 +34,7 @@ class Header extends Component {
   render() {
     return (
       <div className="header-main">
-        <div className="title">
+        <div className="title" data-testid="title">
           <h1>BudKid</h1>
         </div>
         <div
@@ -73,11 +72,11 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = reduxState => {
-  const { user } = reduxState.user
+const mapStateToProps = (reduxState) => {
+  const { user } = reduxState.user;
   return {
-    user
-  }
-}
+    user,
+  };
+};
 
-export default connect(mapStateToProps, { checkUser, logout })(Header)
+export default connect(mapStateToProps, { checkUser, logout })(Header);

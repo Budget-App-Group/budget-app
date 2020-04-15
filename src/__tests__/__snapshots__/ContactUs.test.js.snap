@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`contact us snapshot tests component Contact us matches snapshot 1`] = `
+<div
+  className="contact-main"
+>
+  <div
+    className="contact-title"
+  >
+    <h3>
+      Contact Us
+    </h3>
+  </div>
+  <form
+    className="contact-form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="name-area"
+    >
+      <label
+        className="message-name"
+        htmlFor="message-name"
+      >
+        Your Name:
+      </label>
+      <input
+        className="message-input"
+        name="name"
+        onChange={[Function]}
+        placeholder="Your Name"
+        required={true}
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="email-area"
+    >
+      <label
+        className="message-email"
+        htmlFor="message-email"
+      >
+        Your Email:
+      </label>
+      <input
+        className="message-input"
+        name="email"
+        onChange={[Function]}
+        placeholder="you@email.com"
+        required={true}
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      className="message-area"
+    >
+      <label
+        className="message-label"
+        htmlFor="message-input"
+      >
+        Your Message:
+      </label>
+      <textarea
+        className="message-box"
+        name="message"
+        onChange={[Function]}
+        placeholder="Please write your message here"
+        required={true}
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="submit-button-container"
+    >
+      <button
+        className="submit-contact-button"
+        type="submit"
+      >
+        Send Message
+      </button>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`contact us snapshot tests component Join matches snapshot 1`] = `
+<div
+  className="contact-main"
+>
+  <div
+    className="contact-title"
+  >
+    <h3>
+      Contact Us
+    </h3>
+  </div>
+  <form
+    className="contact-form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="name-area"
+    >
+      <label
+        className="message-name"
+        htmlFor="message-name"
+      >
+        Your Name:
+      </label>
+      <input
+        className="message-input"
+        name="name"
+        onChange={[Function]}
+        placeholder="Your Name"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="email-area"
+    >
+      <label
+        className="message-email"
+        htmlFor="message-email"
+      >
+        Your Email:
+      </label>
+      <input
+        className="message-input"
+        name="email"
+        onChange={[Function]}
+        placeholder="you@email.com"
+        required={true}
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      className="message-area"
+    >
+      <label
+        className="message-label"
+        htmlFor="message-input"
+      >
+        Your Message:
+      </label>
+      <textarea
+        className="message-box"
+        name="message"
+        onChange={[Function]}
+        placeholder="Please write your message here"
+        required={true}
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="submit-button-container"
+    >
+      <button
+        className="submit-contact-button"
+        type="submit"
+      >
+        Send Message
+      </button>
+    </div>
+  </form>
+</div>
+`;
