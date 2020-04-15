@@ -23,21 +23,23 @@ io = socket(
 app.use(express.json());
 
 //sockets
+
 app.use(router);
 app.use(cors());
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: true,
-    rejectUnauthorized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
-    secret: SESSION_SECRET,
-  })
-);
+const sessionObj = session({
+  resave: false,
+  saveUninitialized: true,
+  rejectUnauthorized: false,
+  cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+  secret: SESSION_SECRET,
+});
+app.use(sessionObj);
 
 // const server = http.createServer(app);
 // const io = socket(server);
-
+io.use((socket, next) => {
+  sessionObj(socket.request, socket.request.res || {}, next);
+});
 io.on("connection", (socket) => {
   socket.on("join", ({ name, room }, callback) => {
     const { error, user } = addUser({ id: socket.id, name, room });
@@ -55,9 +57,8 @@ io.on("connection", (socket) => {
       text: `${user.name} has joined!`,
     });
 
-    io.to(user.room).emit("roomData", {
+    io.to(socket.request.session.user.room).emit("roomData", {
       room: user.room,
-      users: getUsersInRoom(user.room),
     });
 
     callback();
@@ -65,6 +66,7 @@ io.on("connection", (socket) => {
 
   socket.on("sendMessage", (message, callback) => {
     const user = getUser(socket.id);
+    console.log(socket.handshake, "hit")
 
     io.to(user.room).emit("message", { user: user.name, text: message });
 
@@ -86,15 +88,6 @@ io.on("connection", (socket) => {
     }
   });
 });
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: true,
-    rejectUnauthorized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
-    secret: SESSION_SECRET,
-  })
-);
 
 /* ------- Auth -------- */
 app.post("/auth/login", authCtrl.login);
