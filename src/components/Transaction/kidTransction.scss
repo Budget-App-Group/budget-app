@@ -1,0 +1,31 @@
+.kt-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    box-sizing: content-box;
+
+    .kt-contain {
+        width: 80%;
+        .kt-amount-box {
+            padding: 10px;
+            box-shadow: darkgreen 0 0 5px inset;
+            background-color: rgba(112, 251, 210, 0.692);
+            background: linear-gradient(5deg, rgba(134, 209, 184, 0.5), rgba(243, 255, 252, 0.7), rgba(134, 209, 184, 0.6));
+            border-radius: 10px;
+            .kt-amount-title {
+                font-size: 2rem;
+                text-align: left;
+            }
+            .kt-amount {
+                padding: 10px;
+                label{
+                    font-family: 'Gotu', sans-seriff;
+                    font-weight: bold;
+                    font-size: 3.2rem;
+                }
+            }
+        }
+    }
+
+}

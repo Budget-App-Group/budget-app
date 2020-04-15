@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import { convertToDollor } from '../../math/convert'
 
+import './kidTransction.scss'
+
 class KidTransaction extends Component {
     constructor(props) {
         super(props)
         this.state = {}
     }
-
-    componentDidMount() {
-    }
-
     render() {
         return(
-            <section style={{width: '100vw', boxSizing: 'border-box', display: 'flex', justifyContent:'space-around', alignItems:'center'}}>
-                <div style={{width: '80%', boxShadow: 'black 0 0 5px', margin: "20px"}}>
-                    <div>
-                        <h2>Amount:</h2>
-                        <div style={{fontSize: '3rem'}}>
+            <section className='kt-section'>
+                <div className='kt-contain'>
+                    <div className='kt-amount-box'>
+                        <h2 className='kt-amount-title'>Amount:</h2>
+                        <div className='kt-amount' style={{fontSize: '3rem'}}>
                             {!isNaN(this.props.amount) ? (
                                 <label>${convertToDollor(this.props.amount)}</label>
                             ) : (
@@ -24,9 +22,10 @@ class KidTransaction extends Component {
                             )}
                         </div>
                     </div>
-                    <div >
-                        {/* <label>$</label>{amount} */}
-                    </div>
+                    {/* <div className="kt-purchase-box">
+                        <h2>Spending: </h2>
+                        <label>$</label>{amount}
+                    </div> */}
                 </div>
             </section>
         )
