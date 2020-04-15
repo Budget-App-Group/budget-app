@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Footer from "./../footer/Footer";
 import "./contactUs.scss";
 
 class ContactUs extends Component {
@@ -89,6 +90,7 @@ class ContactUs extends Component {
             </button>
           </div>
         </form>
+        <Footer />
       </div>
     );
   }
