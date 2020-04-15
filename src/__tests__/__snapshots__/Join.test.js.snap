@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Join snapshot testing component Join render matches snapshot 1`] = `
+<div
+  className="joinOuterContainer"
+>
+  <div
+    className="joinInnerContainer"
+  >
+    <h1
+      className="heading"
+    >
+      Join
+    </h1>
+    <div>
+      <input
+        className="joinInput"
+        onChange={[Function]}
+        placeholder="name"
+        type="text"
+      />
+    </div>
+    <div>
+      <input
+        className="joinInput mt-20"
+        onChange={[Function]}
+        placeholder="Room"
+        type="text"
+      />
+    </div>
+    <a
+      href="/chat?name=&room="
+      onClick={[Function]}
+    >
+      <button
+        className="button mt-20"
+        type="submit"
+      >
+        Sign In
+      </button>
+    </a>
+  </div>
+</div>
+`;

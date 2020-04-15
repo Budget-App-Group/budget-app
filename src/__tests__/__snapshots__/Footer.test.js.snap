@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot test of footer component Footer matches the snapshot when rendered 1`] = `
+<div
+  className="footer-main"
+>
+  <div
+    className="footer-copy"
+  >
+     © Whitney, Nick, Colby
+  </div>
+  <div
+    className="footer-links"
+  >
+    <a
+      href="/contactus"
+      onClick={[Function]}
+    >
+      Contact Us
+    </a>
+  </div>
+</div>
+`;
