@@ -7,7 +7,7 @@ export default function Footer() {
     <div className="footer-main">
       <div className="footer-copy"> © Whitney, Nick, Colby</div>
       <div className="footer-links">
-        <Link to="/contactus">Contact Us</Link>
+        {/* <Link to="/contactus">Contact Us</Link> */}
       </div>
     </div>
   );
