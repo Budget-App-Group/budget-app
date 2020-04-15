@@ -1,0 +1,84 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.pkh {
+    width: 100vw;
+    height: 100%;
+    .pkh-name {
+        font-size: 3rem;
+        padding: 10px;
+    }
+
+    .pkh-items {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-flow: column;
+
+        .pkh-section {
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-flow: column;
+
+            width: 90%;
+
+            border-radius: 10px;
+
+            box-shadow: darkcyan 0 0 5px;
+            padding: 20px;
+            margin: 10px auto;
+
+            .pkh-header {
+                width: 100%;
+
+                display: flex;
+                justify-content: space-between;
+                flex-flow: column;
+                // padding: 10px;
+                .pkh-title {
+                    font-size: 1.5rem;
+                    text-align: left;
+                }
+                .pkh-detail {
+                    position: relative;
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: space-between;
+                    width: 100%;
+                    padding: 10px 0;
+                    .pkh-summary {
+                        width: 70%;
+                        vertical-align: middle;
+                        text-align: left;
+
+                        font-size: 1.2rem;
+                    }
+                    .pkh-amount {
+                        width: 30%;
+                        vertical-align: middle;
+                        text-align: right;
+
+                        font-size: 1.8rem;
+                    }
+                }
+            }
+            
+            .pkh-google-map-contain {
+                width: 100%;
+                height: 150px;
+            }
+        }
+    }
+
+    .input-button-med {
+        padding: 10px 20px;
+        background-color: blue;
+        color: white;
+        border: none;
+        border-radius: 10px;
+    }
+}
