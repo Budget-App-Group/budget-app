@@ -43,7 +43,7 @@ module.exports = {
   },
 
   register: async (req, res) => {
-    const { email, password, firstName, lastName} = req.body;
+    const { email, password, firstName, lastName } = req.body;
     const { session } = req;
     const db = req.app.get("db");
 
@@ -56,6 +56,7 @@ module.exports = {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
+    console.log('last: ' + lastName)
     let newUser = await db.register_user({ hash, email, firstName, lastName });
     newUser = newUser[0];
 
