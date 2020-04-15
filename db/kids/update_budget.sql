@@ -1,3 +1,4 @@
-UPDATE budget 
-SET price = $2
-WHERE user_id = $1
+UPDATE budgets
+SET amount_balance = ${total}
+WHERE kid_id = ${kid_id}
+RETURNING *;
