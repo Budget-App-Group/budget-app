@@ -151,7 +151,7 @@ class Register extends Component {
             <button onClick={this.addKidClicked}>add kid</button>
           </div> */}
         <div className="flex-horizontal link">
-          <span>Already have an account? login here: </span>
+          <span className="have-login">Already have an account? login here: </span>
           <Link to="/" className="input-container-button">
             Log in
           </Link>
