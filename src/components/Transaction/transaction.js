@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { convertToDollor } from '../../math/convert'
+import { sub } from '../../math/math'
 
 class Transaction extends Component {
     constructor(props) {
         super(props)
         this.state = {}
-    }
-
-    componentDidMount() {
-
     }
 
     render() {
@@ -23,11 +20,11 @@ class Transaction extends Component {
                         </div>
                     </div>
                     <div style={{fontSize: '3rem'}}>
-                        <label>${convertToDollor(this.props.amount)}</label>
+                        <label>${convertToDollor(sub(this.props.balance, this.props.amount))}</label>
                     </div>
                     <div>
-                        <button>Info</button>
-                        <button>Add Budget</button>
+                        <button onClick={() => this.props.infoFN(this.props.kidId, this.props.firstName)}>Info</button>
+                        <button onClick={() => this.props.addFN(this.props.budgetID)}>Add Budget</button>
                     </div>
                 </div>
             </section>

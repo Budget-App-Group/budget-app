@@ -1,1 +1,1 @@
-SELECT k.kid_id, first_name, user_pic, budget_id, amount_balance FROM kids k JOIN family f ON k.kid_id = f.kid_id FULL OUTER JOIN  budgets b ON f.kid_id = b.kid_id WHERE f.parents_id = $1;
+SELECT k.kid_id, first_name, user_pic, budget_id, amount_balance, balance FROM kids k JOIN family f ON k.kid_id = f.kid_id FULL OUTER JOIN  budgets b ON f.kid_id = b.kid_id WHERE f.parents_id = $1;

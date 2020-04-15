@@ -9,7 +9,8 @@ module.exports = {
             session.budget = {
                 budgetId: dataBudget.budget_id,
                 kidId: dataBudget.kid_id,
-                amount: dataBudget.amount_balance
+                amount: dataBudget.amount_balance,
+                balance: dataBudget.balance
             }
             res.status(200).send(session.budget)
         }
@@ -33,9 +34,13 @@ module.exports = {
         const { kid_id } = req.params
         const { amount, types, location, summary } = req.body
         const db = req.app.get('db').kids
-
+        console.log('here')
         try {
             let dataPurchase = await db.purchase({kid_id, amount, types, location, summary})
+            
+            const total = dataPurchase.reduce((acc, cur) => cur.amount + acc, 0)
+            console.log(total)
+            await db.update_budget({kid_id, total})
             res.status(200).send(dataPurchase)
         }
         catch {
@@ -56,16 +61,17 @@ module.exports = {
         }
     },
     updateBudget: async (req, res) => {
-        const { budget_id } = req.params
-        const { price } = req.body
+        const { kid_id } = req.params
+        const { amount } = req.body
         const db = req.app.get('db').kids
 
         try {
-            await db.update_budget([budget_id, price])
-            res.sendStatus(200)
+            let data = await db.update_budget({kid_id, amount})
+            data = data[0]
+            res.status(200).send(data)
         }
         catch {
-            res.sendStatus(500)
+            res.sendStatus(404)
         }
     }
 }

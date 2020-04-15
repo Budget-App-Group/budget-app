@@ -12,7 +12,8 @@ module.exports = {
         next()
     },
     isParents: (req, res, next) => {
-        if(!req.session.user.parentsId) {
+        const { parentsId } = req.session.user
+        if(!parentsId) {
             return res.status(403).send('You are not adminantion')
         }
         next()

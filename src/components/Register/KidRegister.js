@@ -71,9 +71,14 @@ class KidRegister extends Component {
     //     // this.props.history.push("/admindashboard");
     //   })
     //   .catch((err) => console.log(err));
-    this.props.kidRegister(this.props.parentsId, kids);
+    console.log("parentsID: " + this.props.user.parentsId)
+    this.props.kidRegister(this.props.user.parentsId, kids);
     this.props.history.push('/admindashboard')
   };
+
+  goBackClicked = () => {
+    this.props.history.goBack()
+  }
 
   clearInput() {
     this.setState({
@@ -86,9 +91,13 @@ class KidRegister extends Component {
 
   render() {
     const kid = this.state.kids.map((kid, i) => <p key={i}>{kid.firstName}</p>);
+    const { isOld } = this.props.location.state
     return (
       <div className="kid-register-main">
         <h1>Kid Register</h1>
+        <div>
+          {isOld ? (<button onClick={this.goBackClicked}>cancel</button>) : null}
+        </div>
         <div className="kid-inputs">
           <form onSubmit={this.handleRegisterKid}>
             <input

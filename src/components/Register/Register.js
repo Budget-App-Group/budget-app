@@ -57,7 +57,10 @@ class Register extends Component {
     // const { firstName, lastName, email, password } = this.state;
     try {
       this.props.register(this.state);
-      this.props.history.push("/kidregister");
+      this.props.history.push({
+        pathname: "/kidregister",
+        state: { isOld: false }
+      });
     } catch {
       console.log("failed");
     }

@@ -75,7 +75,6 @@ module.exports = {
     if (kids) {
       for(let kid = 0; kid < kids.length; kid++) {
         const { username, password, firstName, lastName, pic } = kids[kid]
-        console.log(username)
         let user = await db.get_user([username]);
         user = user[0];
         
@@ -86,8 +85,10 @@ module.exports = {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
         
+        console.log('here')
         let newUser = await db.register_kid({ parents_id, hash, username, firstName, lastName, pic });
         newUser = newUser[0];
+        console.log('data: ' + newUser)
 
         res.sendStatus(200);
       }

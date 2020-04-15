@@ -19,29 +19,31 @@ function KidPurchasing(props) {
     });
   }, [props]);
 
-  const purchaseSubmit = (event) => {
+  const purchaseSubmit = event => {
     event.preventDefault();
+    if(amount && types && summary) {
+      const budget = {
+        amount,
+        types,
+        location,
+        summary
+      };
 
-    const budget = {
-      amount,
-      types,
-      location,
-      summary
-    };
-
-    props.postPurchase(props.user.kidId, budget)
-    
-    // props.postKidBudget(props.user.kidId, budget)
+      props.postPurchase(props.user.kidId, budget)
+      clearInput()
+    }
   };
 
   const handleAmount = event => {
     setAmount(+event.target.value * 100)
   }
 
-  // const clearInput = () => {
-  //   setAmount(0)
-  // }
-  //   const selectOption = location.map();
+  const clearInput = () => {
+    setAmount(0)
+    setType('')
+    setSummary('')
+  }
+
   return (
     <section className="kid-purchase-contain">
       {!props.isGeolocationAvailable ? (
@@ -60,7 +62,7 @@ function KidPurchasing(props) {
           </div>
           <div className="purchase-type">
             <label>Type</label>
-            <select onChange={(event) => setType(event.target.value)}>
+            <select value={types}onChange={(event) => setType(event.target.value)}>
               {/* {selectOption} */}
               <option>Select Type</option>
               <option>Food</option>
@@ -72,6 +74,7 @@ function KidPurchasing(props) {
             <label>Item Name</label>
             <input
               type="text"
+              value={summary}
               onChange={(event) => setSummary(event.target.value)}
             />
           </div>

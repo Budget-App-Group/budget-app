@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 function KidHistory(props) {
 
-    const purchase = props.purchase.length >= 0 ? props.purchase.map(purchase => {
+    const purchase = props.purchase.length >= 0 ? props.purchase.splice(0, 3).map(purchase => {
         return (
             <div key={purchase.purchase_id}>
                 <div>

@@ -8,10 +8,14 @@ import ContactUs from "./components/contactUs/ContactUs";
 import Join from "./components/Join/Join"
 import Chat from "./components/Chat/Chat"
 import KidRegister from "./components/Register/KidRegister";
+import ParentsKids from "./components/Transaction/parentsKidHistory";
+import AddBudget from "./components/Transaction/addBudget";
 
 export default (
   <Switch>
     <Route exact path="/" component={Auth} />
+    <Route exact path="/kids/:id" component={ParentsKids}/>
+    <Route path='/kids/budget/:id' component={AddBudget} />
     <Route path="/register" component={Register} />
     <Route path="/admindashboard" component={AdminDashboard} />
     <Route path="/userdashboard" component={UserDashboard} />

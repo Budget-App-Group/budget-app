@@ -110,6 +110,7 @@ app.get(
   middleCtrl.isParents,
   parentCtrl.getAllKidBudget
 );
+app.get("/api/kid/:budget_id", middleCtrl.isParents, parentCtrl.getKid)
 app.get("/api/kids/:parents_id", middleCtrl.isParents, parentCtrl.getKids)
 app.post("/api/admin/budget", middleCtrl.isParents, parentCtrl.postBudget);
 app.put(
@@ -127,15 +128,15 @@ app.delete(
 
 app.get("/api/kid/budget/:kid_id", middleCtrl.isLogin, kidCtrl.getBudget);
 app.get("/api/kid/purchases/:kid_id", middleCtrl.isLogin, kidCtrl.getPurchases);
-app.post(
-  "/api/kid/purchased/:kid_id",
-  middleCtrl.isLogin,
-  kidCtrl.postPurchase
-);
 app.put(
   "/api/kid/purchased/:kid_id",
   middleCtrl.isLogin,
   kidCtrl.updateBudget
+);
+app.post(
+  "/api/kid/purchased/:kid_id",
+  middleCtrl.isLogin,
+  kidCtrl.postPurchase
 );
 
 // Nodemailer for contact form

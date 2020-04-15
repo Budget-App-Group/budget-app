@@ -1,0 +1,1 @@
+SELECT * FROM budgets b JOIN kids k ON b.kid_id = k.kid_id WHERE b.budget_id = $1;
