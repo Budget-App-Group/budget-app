@@ -1,8 +1,33 @@
-.user-dash-main {
-  height: 85%;
+.ud-main {
   width: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+
+  .ud-header {
+    h2 {
+      font-size: 2rem;
+    }
+  }
+
+  .ud-budget-box {
+    width: 100%;
+    position: relative;
+  }
+
+  .ud-purchase-box {
+    width: 100%;
+
+    // height: 300px;
+    margin: 20px;
+    position: relative;
+  }
+
+  .ud-histroy-box {
+    width: 100%;
+    box-sizing: content-box;
+    // position: relative;
+  }
 }
