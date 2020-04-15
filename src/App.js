@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { checkUser } from "./redux/userReducer";
 import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
+// import Footer from "./components/footer/Footer";
 // import KidPurchasing from "./components/Transaction/kidPurchasing"
 // import Logout from "./components/Logout/Logout"
 // import {Route} from 'react-router-dom';
