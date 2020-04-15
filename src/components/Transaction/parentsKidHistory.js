@@ -4,6 +4,8 @@ import Map from "../Map/map";
 import { connect } from "react-redux";
 import { convertToDollor } from "../../math/convert";
 
+import './parentsKidHistory.scss'
+
 class ParentsKids extends Component {
   constructor(props) {
     super(props);
@@ -37,43 +39,44 @@ class ParentsKids extends Component {
 
   render() {
     const { state } = this.props.location;
-    const purchase = this.state.purchases.length > 0
-      ? this.state.purchases.slice(0, 5).map((purchase) => {
+    const purchase =
+      this.state.purchases.length > 0 ? (
+        this.state.purchases.slice(0, 5).map((purchase) => {
           const { location } = purchase;
           return (
-            <div
+            <section className='pkh-section'
               key={purchase.purchase_id}
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-                flexDirection: "column",
-              }}
             >
-              <div>
-                <h3>{purchase.activity}</h3>
-                <article>{purchase.summary}</article>
-                <label>${convertToDollor(purchase.amount)}</label>
+              <div className="pkh-header">
+                <h3 className="pkh-title">{purchase.activity}</h3>
+                <div className='pkh-detail'>
+                  <p className="pkh-summary">{purchase.summary}</p>
+                  <p className="pkh-amount">${convertToDollor(purchase.amount)}</p>
+                </div>
               </div>
-              <div
-                style={{
-                  width: "80%",
-                  height: "125px",
-                  boxShadow: "black 0 0 5px",
-                }}
-              >
+              <div className="pkh-google-map-contain">
                 <Map place={location} />
               </div>
-            </div>
+            </section>
           );
         })
-      : <div>No History</div>;
+      ) : (
+        <div className='pkh-no-history-box'>
+          <h1>No History</h1>
+        </div>
+      );
 
     return (
-      <div>
-        <h1>{state ? state.fristName : ""}</h1>
-        {purchase}
-        <button onClick={this.backClicked}>cancel</button>
+      <div className="pkh">
+        <h1 className="pkh-name">
+          {state ? state.fristName : ""}
+        </h1>
+        <div className="pkh-items">
+          {purchase}
+        </div>
+        <button className="input-button-med" onClick={this.backClicked}>
+          cancel
+        </button>
       </div>
     );
   }

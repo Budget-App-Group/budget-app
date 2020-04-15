@@ -53,32 +53,45 @@ class KidRegister extends Component {
 
   handleRegisterKid = (event) => {
     event.preventDefault();
-
-    const kids = [...this.state.kids, {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      username: this.state.username,
-      password: this.state.password,
-    }]
-    // const { userName, password } = this.state;
-    // axios
-    //   .post("/api/register", {
-    //     userName,
-    //     password,
-    //   })
-    //   .then((res) => {
-    //     this.props.checkUser(res.data);
-    //     // this.props.history.push("/admindashboard");
-    //   })
-    //   .catch((err) => console.log(err));
-    console.log("parentsID: " + this.props.user.parentsId)
-    this.props.kidRegister(this.props.user.parentsId, kids);
-    this.props.history.push('/admindashboard')
+    let kids = []
+    if (
+      this.state.firstName &&
+      this.state.lastName &&
+      this.state.username &&
+      this.state.password
+    ) {
+      kids = [
+        ...this.state.kids,
+        {
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          username: this.state.username,
+          password: this.state.password,
+        },
+      ];
+      // const { userName, password } = this.state;
+      // axios
+      //   .post("/api/register", {
+      //     userName,
+      //     password,
+      //   })
+      //   .then((res) => {
+      //     this.props.checkUser(res.data);
+      //     // this.props.history.push("/admindashboard");
+      //   })
+      //   .catch((err) => console.log(err));
+      this.props.kidRegister(this.props.user.parentsId, kids);
+      this.props.history.push("/admindashboard");
+    } else {
+      kids = [...this.state.kids]
+      this.props.kidRegister(this.props.user.parentsId, kids);
+      this.props.history.push("/admindashboard");
+    }
   };
 
   goBackClicked = () => {
-    this.props.history.goBack()
-  }
+    this.props.history.goBack();
+  };
 
   clearInput() {
     this.setState({
@@ -91,12 +104,12 @@ class KidRegister extends Component {
 
   render() {
     const kid = this.state.kids.map((kid, i) => <p key={i}>{kid.firstName}</p>);
-    const { isOld } = this.props.location.state
+    const { isOld } = this.props.location.state;
     return (
       <div className="kid-register-main">
         <h1>Kid Register</h1>
         <div>
-          {isOld ? (<button onClick={this.goBackClicked}>cancel</button>) : null}
+          {isOld ? <button onClick={this.goBackClicked}>cancel</button> : null}
         </div>
         <div className="kid-inputs">
           <form onSubmit={this.handleRegisterKid}>

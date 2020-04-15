@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 
+import './map.scss'
+
 class Maps extends Component {
   constructor(props) {
     super(props);
@@ -18,10 +20,17 @@ class Maps extends Component {
   render() {
     const { latitude, longitude } = this.state.location;
     return (
-      <div className="google-map-box" style={{ position: "relative" }}>
+      <div className="google-map-box">
         <Map
           className="google-map"
-          style={{ width: "100%", height: "125px" }}
+          style={{ 
+            width: "100%", 
+            height: "150px",
+            borderRadius: "10px",
+            border: "solid 5px white",
+            boxShadow: "lightGray 0 0 5px",
+            margin: "0 auto"
+          }}
           google={this.props.google}
           center={{
             lat: latitude ? latitude : 0,
