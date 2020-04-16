@@ -17,6 +17,10 @@ class KidRegister extends Component {
     };
   }
 
+  componentDidMount() {
+    if(!this.props.user.parentsId) this.props.history.push('/')
+  }
+
   handleInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -107,6 +111,7 @@ class KidRegister extends Component {
     const kid = this.state.kids.map((kid, i) => <p key={i}>{kid.firstName}</p>);
     
     const { isOld } = this.props.location.state;
+
     return (
       <div className="kid-register-main">
         <h1>Kid Register</h1>

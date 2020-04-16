@@ -38,6 +38,17 @@
   background: linear-gradient(#68cf7f, #8ff1a4 65%, #68cf7f);
 }
 
+@mixin button-small {
+  border: none;
+  border-radius: 5px;
+  padding: 4px 10px;
+  color: rgb(9, 39, 0);
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(#68cf7f, #8ff1a4 65%, #68cf7f);
+}
+
 @mixin text-input {
   border: none;
   border-radius: 2px;

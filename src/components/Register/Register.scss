@@ -1,8 +1,9 @@
-*{
+@import "../../sass/styles.scss";
+
+* {
   padding: 0;
   margin: 0;
 }
-
 
 .register-body {
   width: 100%;
@@ -12,9 +13,8 @@
   justify-content: space-evenly;
   align-items: center;
   color: black;
-  font-family: 'Gotu', sans-serif;
+  font-family: "Gotu", sans-serif;
   background-color: white;
-  
 }
 
 .register-title {
@@ -38,7 +38,7 @@
   color: #fff !important;
   text-transform: uppercase;
   text-decoration: none;
-  background:#68cf7f;
+  background: #68cf7f;
   padding: 20px;
   border-radius: 5px;
   display: inline-block;
@@ -46,17 +46,30 @@
   width: 300px;
   margin-top: 15px;
   font-size: large;
-  
 }
 
-.input-container-button{
-  padding: 10px ;
-  background-color: #68cf7f;
-  color: white;
-  border: none;
-  border-radius: 10px;
+.input-container-button {
+  // padding: 10px ;
+  // background-color: #68cf7f;
+  // color: white;
+  // border: none;
+  // border-radius: 10px;
+  @include button-small;
+  text-decoration: none;
 }
 
+.flex-horizontal {
+  display: flex;
+  flex-direction: column;
+  .rg-login {
+    padding: 10px;
+    .rg-input-login {
+      @include button-small;
+      margin-top: 20px;
+      text-decoration: none;
+    }
+  }
+}
 // .have-login {
 //   font-size: small;
 // }

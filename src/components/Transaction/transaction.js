@@ -20,7 +20,7 @@ class Transaction extends Component {
                             <h2>{this.props.firstName}</h2>
                         </div>
                         <div className='admin-kid-pic'>
-                           <img src='' alt=''/>
+                           <img src={`https://robohash.org/${this.props.kid_id}.png`} style alt=''/>
                         </div>
                     </div>
                     <div className='admin-kid-amount-boc'>

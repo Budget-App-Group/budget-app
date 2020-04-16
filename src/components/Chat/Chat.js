@@ -8,7 +8,7 @@ import InfoBar from '../InfoBar/InfoBar'
 import Input from '../input/Input'
 
 import './Chat.css'
-import { resolveHostname } from 'nodemailer/lib/shared'
+// import { resolveHostname } from 'nodemailer/lib/shared'
 
 const Chat = ({ location }) => {
   const [name, setName] = useState('')
@@ -30,7 +30,7 @@ const Chat = ({ location }) => {
         alert(error)
       }
     })
-  }, [])
+  }, [socket, location.search])
 
   socket.on('New message', ({ text, user, room }) => {
     setMessages((messages) => [...messages, { text, user }])

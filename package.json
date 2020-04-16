@@ -44,7 +44,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently \"nodemon\" \"react-scripts start\""
+    "dev": "concurrently \"react-scripts start\" \"nodemon\""
   },
   "eslintConfig": {
     "extends": "react-app"
