@@ -7,7 +7,7 @@ import Messages from "../Message/Messages/Messages";
 import InfoBar from "../InfoBar/InfoBar";
 import Input from "../input/Input";
 
-import "./Chat.css";
+import './Chat.css'
 // import { resolveHostname } from 'nodemailer/lib/shared'
 
 const Chat = ({ location }) => {

@@ -10,44 +10,30 @@ class Transaction extends Component {
     super(props);
     this.state = {};
   }
-
-  render() {
-    return (
-      <section className="admin-kid-item-section">
-        <div className="admin-kid-item">
-          <div className="admin-kid-header">
-            <div className="admin-kid-name">
-              <h2>{this.props.firstName}</h2>
-            </div>
-            <div className="admin-kid-pic">
-              <img src="" alt="" />
-            </div>
-          </div>
-          <div className="admin-kid-amount-boc">
-            <span className="admin-kid-amount">
-              ${convertToDollor(sub(this.props.balance, this.props.amount))}
-            </span>
-          </div>
-          <div className="admin-kid-input-buttons">
-            <button
-              className="admin-kid-button"
-              onClick={() =>
-                this.props.infoFN(this.props.kidId, this.props.firstName)
-              }
-            >
-              Info
-            </button>
-            <button
-              className="admin-kid-button"
-              onClick={() => this.props.addFN(this.props.budgetID)}
-            >
-              Budget
-            </button>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  
+    render() {
+        return(
+            <section className='admin-kid-item-section'>
+                <div className='admin-kid-item'>
+                    <div className='admin-kid-header'>
+                        <div className='admin-kid-name'>
+                            <h2>{this.props.firstName}</h2>
+                        </div>
+                        <div className='admin-kid-pic'>
+                           <img src={`https://robohash.org/${this.props.kid_id}.png`} style alt=''/>
+                        </div>
+                    </div>
+                    <div className='admin-kid-amount-boc'>
+                        <span className='admin-kid-amount'>${convertToDollor(sub(this.props.balance, this.props.amount))}</span>
+                    </div>
+                    <div className='admin-kid-input-buttons'>
+                        <button className='admin-kid-button' onClick={() => this.props.infoFN(this.props.kidId, this.props.firstName)}>Info</button>
+                        <button className='admin-kid-button' onClick={() => this.props.addFN(this.props.budgetID)}>Budget</button>
+                    </div>
+                </div>
+            </section>
+        )
+    }
 }
 
 const mapStateToProps = (reduxState) => {

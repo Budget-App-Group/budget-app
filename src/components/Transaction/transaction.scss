@@ -28,6 +28,7 @@
         }
       }
       .admin-kid-pic {
+        position: relative;
           width: 75px;
           height: 75px;
           border-radius: 50%;
@@ -35,7 +36,8 @@
             border: solid 3px #68cf7f;
           box-shadow: darkgreen -3px 3px 8px;
         img {
-          // something
+          width: 100%;
+          border-radius: 50%;
         }
       }
     }
