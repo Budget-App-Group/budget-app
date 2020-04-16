@@ -75,9 +75,11 @@ class Auth extends Component {
         </div>
         <div className="auth-register-link">
           <span className='register-here-text'> Don't have an account? Register here: </span>
+          <div className="link-reg">
           <Link to="/register" className="auth-register-button">
             Register
           </Link>
+          </div>
           {/* 54H */}
         </div>
       </div>

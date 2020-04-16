@@ -1,3 +1,5 @@
+@import "../../sass/styles.scss";
+
 *{
   padding: 0;
   margin: 0;
@@ -20,42 +22,61 @@
 }
 
 .auth-input {
-  border-radius: 0;
-  padding: 15px 20px;
-  width: 300px;
+  // border-radius: 0;
+  // padding: 15px 20px;
+  // width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: darkgreen 0 0 5px;
+  justify-content: center;
+  // box-shadow: darkgreen 0 0 5px;
+  @include text-input;
 }
 
 .auth-button-container {
   width: 100%;
 }
 .auth-login-button {
-  color: #fff !important;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #68cf7f;
-  padding:10px 20px;
-  border-radius: 10px;
-  display: inline-block;
-  border: none;
-  width: 300px;
-  font-size: large;
-  margin-top: 10px;
+  // color: #fff !important;
+  // text-transform: uppercase;
+  // text-decoration: none;
+  // background: #68cf7f;
+  // padding:10px 20px;
+  // border-radius: 10px;
+  // display: inline-block;
+  // border: none;
+  // width: 300px;
+  // font-size: large;
+  // margin-top: 10px;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+ margin-top: 25px;
+  @include button-lg
 
 }
 
 .auth-register-button{
-  padding: 10px ;
-  background-color: #68cf7f;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 5px;
-  text-transform: uppercase;
-  margin: 20px;
+  // padding: 10px ;
+  // background-color: #68cf7f;
+  // color: white;
+  // border: none;
+  // border-radius: 10px;
+  // padding: 5px;
+  // text-transform: uppercase;
+  // margin: 20px;
+  // margin-top: 100px;
+  @include button-small;
+  text-decoration:none;
+}
+
+// .auth-register-link {
+//   height:200px;
+// }
+
+.link-reg {
+  padding: 15px;
 }
 
 

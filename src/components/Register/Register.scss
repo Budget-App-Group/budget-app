@@ -1,6 +1,6 @@
 @import "../../sass/styles.scss";
 
-* {
+*{
   padding: 0;
   margin: 0;
 }
@@ -20,35 +20,43 @@
 .register-title {
   font-size: 2rem;
 }
+    .register-inputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
 
 .register-input {
-  border-radius: 0;
-  padding: 15px 20px;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: darkgreen 0 0 5px;
+  // border-radius: 0;
+  // padding: 15px 20px;
+  // width: 300px;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // box-shadow: darkgreen 0 0 5px;
+  @include text-input;
 }
 
 .reg-button-container {
   width: 100%;
 }
 .reg-button {
-  color: #fff !important;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #68cf7f;
-  padding: 20px;
-  border-radius: 5px;
-  display: inline-block;
-  border: none;
-  width: 300px;
-  margin-top: 15px;
-  font-size: large;
+  // color: #fff !important;
+  // text-transform: uppercase;
+  // text-decoration: none;
+  // background:#68cf7f;
+  // padding: 20px;
+  // border-radius: 5px;
+  // display: inline-block;
+  // border: none;
+  // width: 300px;
+  margin-top: 25px;
+  // font-size: large;
+  @include button-lg
 }
 
-.input-container-button {
+.input-container-button{
   // padding: 10px ;
   // background-color: #68cf7f;
   // color: white;
@@ -73,3 +81,4 @@
 // .have-login {
 //   font-size: small;
 // }
+
