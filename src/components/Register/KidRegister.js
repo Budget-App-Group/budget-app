@@ -58,7 +58,7 @@ class KidRegister extends Component {
 
   handleRegisterKid = (event) => {
     event.preventDefault();
-    let kids = []
+    let kids = [];
     if (
       this.state.firstName &&
       this.state.lastName &&
@@ -88,7 +88,7 @@ class KidRegister extends Component {
       this.props.kidRegister(this.props.user.parentsId, kids);
       this.props.history.push("/admindashboard");
     } else {
-      kids = [...this.state.kids]
+      kids = [...this.state.kids];
       this.props.kidRegister(this.props.user.parentsId, kids);
       this.props.history.push("/admindashboard");
     }
@@ -109,61 +109,82 @@ class KidRegister extends Component {
 
   render() {
     const kid = this.state.kids.map((kid, i) => <p key={i}>{kid.firstName}</p>);
-    
+
     const { isOld } = this.props.location.state;
 
     return (
       <div className="kid-register-main">
-        <h1>Kid Register</h1>
-        <div>
-          {isOld ? <button onClick={this.goBackClicked}>cancel</button> : null}
-        </div>
-        <div className="kid-inputs">
-          <form onSubmit={this.handleRegisterKid}>
-            <input className="kid-firstname"
-              type="text"
-              name="firstName"
-              value={this.state.firstName}
-              placeholder="Enter First Name"
-              onChange={this.handleInput}
-            />
-            <input className='kid-lastname'
-              type="text"
-              name="lastName"
-              value={this.state.lastName}
-              placeholder="Enter Last Name"
-              onChange={this.handleInput}
-            />
-            <input className='enter-kid-username'
-              type="text"
-              name="username"
-              value={this.state.username}
-              placeholder="Enter Kid Username"
-              onChange={this.handleInput}
-            />
-            <input className='enter-kid-pw'
-              type="password"
-              name="password"
-              value={this.state.password}
-              placeholder="Enter Kid Password"
-              onChange={this.handleInput}
-            />
+        <div className="kid-reg-border-box">
+          <h1>Add A Kid</h1>
+          <div>
+            {isOld ? (
+              <div
+                id="cancel-button"
+                className="input-button-med"
+                onClick={this.goBackClicked}
+              >
+                <div></div>
+                <div></div>
+              </div>
+            ) : null}
+          </div>
+          <div className="kid-inputs">
+            <form onSubmit={this.handleRegisterKid}>
+              <input
+                className="kid-reg-input"
+                type="text"
+                name="firstName"
+                value={this.state.firstName}
+                placeholder="Enter First Name"
+                onChange={this.handleInput}
+              />
+              <input
+                className="kid-reg-input"
+                type="text"
+                name="lastName"
+                value={this.state.lastName}
+                placeholder="Enter Last Name"
+                onChange={this.handleInput}
+              />
+              <input
+                className="kid-reg-input"
+                type="text"
+                name="username"
+                value={this.state.username}
+                placeholder="Enter Kid Username"
+                onChange={this.handleInput}
+              />
+              <input
+                className="kid-reg-input"
+                type="password"
+                name="password"
+                value={this.state.password}
+                placeholder="Enter Kid Password"
+                onChange={this.handleInput}
+              />
 
-            <button className='add-kid-bt' onClick={this.addKidInfo} type="button">
-              Add kid
-            </button>
-            <button type="submit">Submit</button>
-          </form>
-          {kid}
+              <button
+                className="add-kid-bt"
+                onClick={this.addKidInfo}
+                type="button"
+              >
+                Add kid
+              </button>
+              <button type="submit" className="submit-reg-kid">
+                Submit
+              </button>
+            </form>
+            {kid}
 
-          {/* {this.props.id > 0 ? 
+            {/* {this.props.id > 0 ? 
             <button onClick={() => this.props.deleteKidFN(this.props.id)}>delete kid</button>
            : null } */}
-        </div>
+          </div>
 
-        {/* <button onClick={this.handleRegister} className="kid-button">
+          {/* <button onClick={this.handleRegister} className="kid-button">
           Register Kid
         </button> */}
+        </div>
       </div>
     );
   }

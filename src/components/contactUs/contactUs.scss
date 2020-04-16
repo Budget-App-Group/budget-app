@@ -1,3 +1,5 @@
+@import "../../sass/styles.scss";
+
 .contact-page {
   display: flex;
   flex-direction: column;
@@ -26,6 +28,7 @@
   width: 80%;
   border-radius: 10px;
   box-shadow: darkgreen 0 0 5px;
+  background-color: #68cf7e3a;
 }
 
 .contact-title {
@@ -34,10 +37,15 @@
 
 .contact-form {
   height: 70%;
-  width: 70%;
+  width: 75%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
+}
+
+.name-area {
+  margin-top: 30px;
 }
 
 .message-area {
@@ -47,37 +55,35 @@
 }
 
 .message-input {
-  border-radius: 0px;
-  padding: 15px 20px;
-
-  box-shadow: darkgreen 0 0 5px;
+  @include text-input;
 }
 
 .message-box {
+  @include text-input;
+  width: 263px;
   height: 100px;
-  border-radius: 0;
-  padding: 15px 20px;
-  width: 100%;
-  border-radius: 0;
-
-  box-shadow: darkgreen 0 0 5px;
 }
 
 .submit-button-container {
   width: 100%;
   margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .submit-contact-button {
-  color: #fff !important;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #68cf7f;
-  padding: 20px;
-  border-radius: 5px;
-  display: inline-block;
-  border: none;
-  width: 100%;
+  // color: #fff !important;
+  // text-transform: uppercase;
+  // text-decoration: none;
+  // background: #68cf7f;
+  // padding: 20px;
+  // border-radius: 5px;
+  // display: inline-block;
+  // border: none;
+  // width: 100%;
+  @include button-lg;
 }
 
 .footer {
