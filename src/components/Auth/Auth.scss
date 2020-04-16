@@ -52,20 +52,31 @@
   // flex-direction: column;
   // justify-content: center;
   // align-items: center;
-
+ margin-top: 25px;
   @include button-lg
 
 }
 
 .auth-register-button{
-  padding: 10px ;
-  background-color: #68cf7f;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 5px;
-  text-transform: uppercase;
-  margin: 20px;
+  // padding: 10px ;
+  // background-color: #68cf7f;
+  // color: white;
+  // border: none;
+  // border-radius: 10px;
+  // padding: 5px;
+  // text-transform: uppercase;
+  // margin: 20px;
+  // margin-top: 100px;
+  @include button-small;
+  text-decoration:none;
+}
+
+// .auth-register-link {
+//   height:200px;
+// }
+
+.link-reg {
+  padding: 15px;
 }
 
 

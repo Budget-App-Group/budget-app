@@ -152,10 +152,10 @@ class Register extends Component {
           </div> */}
         <div className="flex-horizontal link">
           <span className="have-login">Already have an account? login here: </span>
-          <div>
-          <Link to="/" className='input-container-button'>
-            Log in
-          </Link>
+          <div className="rg-login">
+            <Link to="/" className="rg-input-login">
+              Log in
+            </Link>
           </div>
         </div>
       </div>

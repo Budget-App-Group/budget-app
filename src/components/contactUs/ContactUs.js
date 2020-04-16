@@ -38,7 +38,7 @@ class ContactUs extends Component {
         <div className="contact-main">
           <div className="contact-border-contain">
             <div className="contact-title">
-              <h3>Contact Us</h3>
+              <h2>Contact Us</h2>
             </div>
             <form className="contact-form" onSubmit={() => this.nodeMail()}>
               <div className="name-area">

@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { convertToDollor } from '../../math/convert'
-import { sub } from '../../math/math'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { convertToDollor } from "../../math/convert";
+import { sub } from "../../math/math";
 
-import './transaction.scss'
+import "./transaction.scss";
 
 class Transaction extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {}
-    }
-
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  
     render() {
         return(
             <section className='admin-kid-item-section'>
@@ -20,7 +20,7 @@ class Transaction extends Component {
                             <h2>{this.props.firstName}</h2>
                         </div>
                         <div className='admin-kid-pic'>
-                           <img src='' alt=''/>
+                           <img src={`https://robohash.org/${this.props.kid_id}.png`} style alt=''/>
                         </div>
                     </div>
                     <div className='admin-kid-amount-boc'>
@@ -36,11 +36,11 @@ class Transaction extends Component {
     }
 }
 
-const mapStateToProps = reduxState => {
-    const { user } = reduxState.user
-    return {
-        user,
-    }
-}
+const mapStateToProps = (reduxState) => {
+  const { user } = reduxState.user;
+  return {
+    user,
+  };
+};
 
-export default connect(mapStateToProps)(Transaction)
+export default connect(mapStateToProps)(Transaction);
