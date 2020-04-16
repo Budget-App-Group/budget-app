@@ -54,7 +54,7 @@ class Header extends Component {
                 <Link to="/admindashboard">Dashboard</Link>
               </li>
               <li>
-                <Link to="/chat">Chat</Link>
+                <Link to="/join">Chat</Link>
               </li>
               <li>
                 <Link to="/contactus">Contact Us</Link>
