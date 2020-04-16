@@ -28,7 +28,7 @@ class Maps extends Component {
             height: "150px",
             borderRadius: "10px",
             border: "solid 5px white",
-            boxShadow: "lightGray 0 0 5px",
+            boxShadow: "darkgreen 0 0 5px",
             margin: "0 auto"
           }}
           google={this.props.google}

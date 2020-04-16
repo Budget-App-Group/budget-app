@@ -1,0 +1,59 @@
+@import "../../sass/styles.scss";
+
+.admin-kid-item-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: column;
+  .admin-kid-item {
+    width: 80%;
+    box-sizing: content-box;
+    padding: 10px;
+    box-shadow: darkgreen 0 0 5px;
+    background-color: #68cf7e3a;
+    border-radius: 10px;
+    .admin-kid-header {
+        width: 100%;
+        padding: 0 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-flow: row;
+      .admin-kid-name {
+          text-align: left;
+        h2 {
+            @include Gotu-font;
+            font-size: 2rem;
+        }
+      }
+      .admin-kid-pic {
+          width: 75px;
+          height: 75px;
+          border-radius: 50%;
+            background-color: white;
+            border: solid 3px #68cf7f;
+          box-shadow: darkgreen -3px 3px 8px;
+        img {
+          // something
+        }
+      }
+    }
+    .admin-kid-amount-boc {
+      .admin-kid-amount {
+          @include Gotu-font;
+          font-weight: bold;
+          font-size: 4rem;
+      }
+    }
+    .admin-kid-input-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+      .admin-kid-button {
+          @include button-med;
+      }
+    }
+  }
+}

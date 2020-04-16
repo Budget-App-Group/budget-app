@@ -1,3 +1,5 @@
+@import '../../sass/styles.scss';
+
 .ud-main {
   width: 100%;
   position: relative;
@@ -7,8 +9,14 @@
   align-items: center;
 
   .ud-header {
+    width: 100%;
+    padding: 0 20px;
+    
     h2 {
-      font-size: 2rem;
+      @include Gotu-font;
+      width: 100%;
+      text-align: left;
+      font-size: 3rem;
     }
   }
 
@@ -25,9 +33,9 @@
     position: relative;
   }
 
-  .ud-histroy-box {
+  .ud-history-box {
     width: 100%;
-    box-sizing: content-box;
-    // position: relative;
+    // box-sizing: content-box;
+    position: relative;
   }
 }

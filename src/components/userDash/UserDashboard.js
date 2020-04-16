@@ -13,7 +13,7 @@ function UserDashboard(props) {
   useEffect(() => {
     if (!props.user.kidId) props.history.push("/");
     if (props.user.kidId) getData();
-  }, [props.user]);
+  }, [props.user, props.history]);
 
   const getData = () => {
     props.getKidBudget(props.user.kidId);

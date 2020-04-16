@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { convertToDollor } from '../../math/convert'
 import { sub } from '../../math/math'
 
+import './transaction.scss'
+
 class Transaction extends Component {
     constructor(props) {
         super(props)
@@ -11,20 +13,22 @@ class Transaction extends Component {
 
     render() {
         return(
-            <section style={{width: '100vw', boxSizing: 'border-box', display: 'flex', justifyContent:'space-around', alignItems:'center'}}>
-                <div style={{width: '80%', boxShadow: 'black 0 0 5px', margin: "20px"}}>
-                    <div>
-                        <h2>{this.props.firstName}</h2>
-                        <div>
+            <section className='admin-kid-item-section'>
+                <div className='admin-kid-item'>
+                    <div className='admin-kid-header'>
+                        <div className='admin-kid-name'>
+                            <h2>{this.props.firstName}</h2>
+                        </div>
+                        <div className='admin-kid-pic'>
                            <img src='' alt=''/>
                         </div>
                     </div>
-                    <div style={{fontSize: '3rem'}}>
-                        <label>${convertToDollor(sub(this.props.balance, this.props.amount))}</label>
+                    <div className='admin-kid-amount-boc'>
+                        <span className='admin-kid-amount'>${convertToDollor(sub(this.props.balance, this.props.amount))}</span>
                     </div>
-                    <div>
-                        <button onClick={() => this.props.infoFN(this.props.kidId, this.props.firstName)}>Info</button>
-                        <button onClick={() => this.props.addFN(this.props.budgetID)}>Add Budget</button>
+                    <div className='admin-kid-input-buttons'>
+                        <button className='admin-kid-button' onClick={() => this.props.infoFN(this.props.kidId, this.props.firstName)}>Info</button>
+                        <button className='admin-kid-button' onClick={() => this.props.addFN(this.props.budgetID)}>Budget</button>
                     </div>
                 </div>
             </section>

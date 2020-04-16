@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { checkUser } from "../../redux/userReducer";
 import axios from "axios";
 import Transaction from "../Transaction/transaction";
-import "./adminDashboard.scss";
+
+import './adminDashboard.scss'
 
 function AdminDashboard(props) {
   const [kids, setKids] = useState([]);
@@ -33,10 +34,10 @@ function AdminDashboard(props) {
 
   const addKidClicked = () => {
     props.history.push({
-      pathname: '/kidregister',
-      state: { isOld: true }
-    })
-  }
+      pathname: "/kidregister",
+      state: { isOld: true },
+    });
+  };
 
   const kid = kids.map((kid) => {
     return (
@@ -55,16 +56,20 @@ function AdminDashboard(props) {
   });
 
   return (
-    <div className="admin-dash-main">
-      Admin Dash Comp
-      <div className="link-kid-register">
-        <div style={{width: "30px", height: '30px', borderRadius: "50%", backgroundColor: "blue"}} onClick={addKidClicked}>
-          <div></div>
-          <div></div>
+    <div className="admin-main">
+      <div className='admin-contain'>
+        <div className='admin-name'>
+          <h2>{props.user.firstName}</h2>
         </div>
-      </div>
-      <div>
-        {kid}
+        <div className="admin-register">
+          <div className="admin-add-button" onClick={addKidClicked}>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div className="admin-kids-lists">
+          {kid}
+        </div>
       </div>
     </div>
   );
