@@ -1,0 +1,53 @@
+@import "../../sass/styles.scss";
+
+.admin-main {
+  position: relative;
+  width: 100vw;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  .admin-contain {
+    // background-color: green;
+    width: 100%;
+    .admin-name {
+      width: 80%;
+      margin: auto;
+      h2 {
+        text-align: left;
+        @include Gotu-font;
+        font-size: 3rem;
+      }
+    }
+    .admin-register {
+      .admin-add-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #68cf7f;
+        box-shadow: darkgreen 0 0 2px;
+        div {
+          width: 75%;
+          height: 4px;
+          border-radius: 2px;
+          background-color: white;
+        }
+        div:first-child {
+          transform: rotate(90deg) translate(18px, -5px);
+        }
+        div:last-child {
+          transform: translate(5px, 14px);
+        }
+      }
+    }
+    .admin-kids-lists {
+        position: relative;
+        width: 100%;
+        box-sizing: content-box;
+    }
+  }
+}

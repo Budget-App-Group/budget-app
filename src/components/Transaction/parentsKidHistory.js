@@ -22,6 +22,10 @@ class ParentsKids extends Component {
     this.getData();
   }
 
+  componentWillMount() {
+    document.removeEventListener('scroll', this.moveCancel)
+  }
+
   getData = () => {
     axios
       .get(`/api/kid/purchases/${+this.props.match.params.id}`)
@@ -37,7 +41,20 @@ class ParentsKids extends Component {
     this.props.history.goBack();
   };
 
+  moveCancel = () => {
+    const cancelButton = document.getElementById('cancel-button')
+    if(cancelButton) {
+      if(window.scrollY >= 0 && window.scrollY < 70) {
+        cancelButton.style.top = '100px'
+      }
+      else {
+        cancelButton.style.top = '20px'
+      }
+    }
+  }
+
   render() {
+    document.addEventListener('scroll', this.moveCancel)
     const { state } = this.props.location;
     const purchase =
       this.state.purchases.length > 0 ? (
@@ -74,9 +91,10 @@ class ParentsKids extends Component {
         <div className="pkh-items">
           {purchase}
         </div>
-        <button className="input-button-med" onClick={this.backClicked}>
-          cancel
-        </button>
+        <div id='cancel-button' className="input-button-med" onClick={this.backClicked}>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     );
   }

@@ -106,12 +106,12 @@ class KidRegister extends Component {
   render() {
     const kid = this.state.kids.map((kid, i) => <p key={i}>{kid.firstName}</p>);
     
-    // const { isOld } = this.props.location.state;
+    const { isOld } = this.props.location.state;
     return (
       <div className="kid-register-main">
         <h1>Kid Register</h1>
         <div>
-          {/* {isOld ? <button onClick={this.goBackClicked}>cancel</button> : null} */}
+          {isOld ? <button onClick={this.goBackClicked}>cancel</button> : null}
         </div>
         <div className="kid-inputs">
           <form onSubmit={this.handleRegisterKid}>

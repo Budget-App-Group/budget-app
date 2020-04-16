@@ -6,7 +6,7 @@ import { postPurchase } from "../../redux/purchaseReducer";
 import "./kidPurchasing.scss";
 
 function KidPurchasing(props) {
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
   const [types, setType] = useState("");
   const [location, setLocation] = useState({});
   const [summary, setSummary] = useState("");
@@ -20,84 +20,82 @@ function KidPurchasing(props) {
   }, [props]);
 
   const purchaseSubmit = (event) => {
-    event.preventDefault();
-    if (amount && types && summary) {
+    // event.preventDefault();
+    if (amount && types !== "Select Options" && summary) {
       const budget = {
-        amount,
+        amount: amount * 100,
         types,
         location,
         summary,
       };
-
       props.postPurchase(props.user.kidId, budget);
       clearInput();
     }
   };
-
-  const handleAmount = (event) => {
-    setAmount(+event.target.value * 100);
-  };
-
+  
   const clearInput = () => {
-    setAmount(0);
+    setAmount("");
     setType("");
     setSummary("");
   };
 
   return (
     <section className="kp-section">
-        <form
-          className="kp-form"
-          onSubmit={purchaseSubmit}
-        >
-          <div className="kp-amount">
-            <h2>Amount:</h2>
-            <div className="kp-currency-input">
-              <span>$</span>
-              <input
-                className="kp-amount-input"
-                type="number"
-                step="0.01"
-                onChange={handleAmount}
-              />
-            </div>
-          </div>
-          <div className="kp-type">
-            <label>Type</label>
-            <select
-              className="kp-type-input"
-              value={types}
-              onChange={(event) => setType(event.target.value)}
-            >
-              {/* {selectOption} */}
-              <option>Select Type</option>
-              <option>Food</option>
-              <option>Gas</option>
-              <option>Entertainment</option>
-              <option>Clothes</option>
-            </select>
-          </div>
-          <div className="kp-name">
-            <label>Item Name</label>
+      <div className="kp-title">
+        <h2>Purchasing</h2>
+      </div>
+      <form className="kp-form" onSubmit={purchaseSubmit}>
+        <div className="kp-amount">
+          <div className="kp-currency-input">
+            <span>$</span>
             <input
-              className="kp-name-input"
-              type="text"
-              value={summary}
-              onChange={(event) => setSummary(event.target.value)}
+              className="kp-amount-input"
+              type="number"
+              step="0.01"
+              placeholder="0.00"
+              value={amount}
+              onChange={(event) => setAmount(event.target.value)}
             />
           </div>
-          <div className="kp-button">
-            <button className="kp-button-input" type="submit">
-              Purchase
-            </button>
-          </div>
-          {!props.isGeolocationAvailable ? (
-        <div> Your browser does not support Geolocation</div>
-      ) : !props.isGeolocationEnabled ? (
-        <div>Geolocation is not enabled</div>
-      ) : (
-      <div></div>)}
-        </form>
+        </div>
+        <div className="kp-type">
+          <label>Type</label>
+          <select
+            className="kp-type-input"
+            value={types}
+            onChange={(event) => setType(event.target.value)}
+          >
+            {/* {selectOption} */}
+            <option>Select Opitons</option>
+            <option>Food</option>
+            <option>Gas</option>
+            <option>Entertainment</option>
+            <option>Clothes</option>
+          </select>
+        </div>
+        <div className="kp-name">
+          <label>Item</label>
+          <input
+            className="kp-name-input"
+            type="text"
+            placeholder="Name"
+            value={summary}
+            onChange={(event) => setSummary(event.target.value)}
+          />
+        </div>
+        <div className="kp-button">
+          <button className="kp-button-input" type="submit">
+            Purchase
+          </button>
+        </div>
+        {!props.isGeolocationAvailable ? (
+          <div> Your browser does not support Geolocation</div>
+        ) : !props.isGeolocationEnabled ? (
+          <div>Geolocation is not enabled</div>
+        ) : (
+          <div></div>
+        )}
+      </form>
     </section>
   );
 }

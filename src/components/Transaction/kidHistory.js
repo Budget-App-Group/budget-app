@@ -2,27 +2,37 @@ import React from 'react';
 import { convertToDollor } from '../../math/convert'
 import { connect } from 'react-redux'
 
-function KidHistory(props) {
+import './kidHistory.scss'
 
-    const purchase = props.purchase.length >= 0 ? props.purchase.splice(0, 3).map(purchase => {
+function KidHistory(props) {
+    
+    const purchase = props.purchase.length >= 0 ? props.purchase.splice(0, 10).map(purchase => {
         return (
-            <div key={purchase.purchase_id}>
-                <div>
+            <div key={purchase.purchase_id} className='kh-items-contain'>
+                <div className='kh-flex-row'>
                     <h2>{purchase.activity}</h2>
-                    <label>${convertToDollor(purchase.amount)}</label>
+                    <span>${convertToDollor(purchase.amount)}</span>
                 </div>
-                <div>
+                {/* <div>
                     <button>Edit</button>
-                </div>
+                </div> */}
             </div>
         )
-    }) : <div>No History</div>
+    }) : <div className='kh-no-history'>No History</div>
 
     return (
-        <div>
-            KidHistory:
-            { purchase }
-        </div>
+        <section className='kh-section'>
+            <div className='kh-contain'>
+                <div className='kh-title-box'>
+                    <h1 className='kh-title'>History</h1>
+                </div>
+                <div className='kh-history'>
+                    <div className='kh-scroll'>
+                        { purchase }
+                    </div>
+                </div>
+            </div>
+        </section>
     )
 }
 
