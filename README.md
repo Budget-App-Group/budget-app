@@ -7,7 +7,7 @@ It is designed to help parents set and monitor budgets for their children,
 This project uses a stack based on ReactJS, NodeJS, Express and PostgreSQL.
 Additional technologies are Sockets.io, Googlemaps in react, NodeMailer, and SASS
 
-The project was created By Whitney Wilken, Nick Hunsaker, and Colby Birrell.
+The project was created By Whitney Wilcken, Nick Hunsaker, and Colby Birrell.
 
 
 
