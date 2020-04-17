@@ -1,4 +1,4 @@
-This project is called BudKid.
+This project is called BudKid, 
 It is designed to help parents set and monitor budgets for their children, 
   and communicate with them regarding the budget.
   the parents can set limits, view purchases and the location where the purchase took place.
