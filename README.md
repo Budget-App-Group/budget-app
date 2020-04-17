@@ -1,3 +1,20 @@
+This project is called BudKid.
+It is designed to help parents set and monitor budgets for their children, 
+  and communicate with them regarding the budget.
+  the parents can set limits, view purchases and the location where the purchase took place.
+  
+
+This project uses a stack based on ReactJS, NodeJS, Express and PostgreSQL.
+Additional technologies are Sockets.io, Googlemaps in react, NodeMailer, and SASS
+
+The project was created By Whitney Wilken, Nick Hunsaker, and Colby Birrell.
+
+
+
+
+
+
+======================================================================================================
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
