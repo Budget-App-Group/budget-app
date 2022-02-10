@@ -18,7 +18,7 @@
     "google-maps-react": "^2.0.2",
     "lottie": "0.0.1",
     "massive": "^6.2.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "nodemailer": "^6.4.6",
     "nodemon": "^2.0.2",
     "query-string": "^6.12.0",
